@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor:Color(0xffFAF9F6),
+            scaffoldBackgroundColor:Colors.white,
             secondaryHeaderColor:Colors.white ,
-            focusColor: Colors.grey.withOpacity(0.1),
+            focusColor: Color(0xffF2F2F2),
             highlightColor: Colors.black,
             textTheme: TextTheme(
                 titleMedium: GoogleFonts.poppins(color: Colors.black,fontWeight: FontWeight.bold,fontSize:40.sp),
@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
 
           ),
          darkTheme: ThemeData.dark().copyWith(
-           scaffoldBackgroundColor:Color(0xff181818),
-           secondaryHeaderColor:  Color(0xff202020),
-           focusColor:Color(0xff2C2C2C),
+           scaffoldBackgroundColor:Colors.black,
+           secondaryHeaderColor: Color(0xff181818),
+           focusColor: Color(0xff202020),
            highlightColor: Colors.white,
            textTheme: TextTheme(
              titleMedium: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.bold,fontSize:40.sp),
