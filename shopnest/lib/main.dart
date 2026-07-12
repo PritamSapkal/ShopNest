@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/SplashScreen.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  return runApp(MyApp());
+  return runApp(ProviderScope(child: MyApp()));
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,12 +21,25 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: const Color.fromARGB(255, 33, 33, 33),
-            canvasColor: const Color.fromARGB(255, 33, 33, 33),
+          theme: ThemeData.light().copyWith(
+            scaffoldBackgroundColor:Colors.white,
+            highlightColor: Colors.black,
+              textTheme: TextTheme(
+                titleMedium: GoogleFonts.poppins(color: Colors.black,fontWeight: FontWeight.bold,fontSize:40.sp),
+                titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),
+              ),
+
           ),
-         home: Splashscreen(),
+         darkTheme: ThemeData.dark().copyWith(
+           scaffoldBackgroundColor:Colors.black,
+           highlightColor: Colors.white,
+           textTheme: TextTheme(
+             titleMedium: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.bold,fontSize:40.sp),
+             titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),
+           ),
+         ),
+         themeMode: ThemeMode.system,
+         home:Splashscreen(),
         );
       },
     );
