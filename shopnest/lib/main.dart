@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,21 +21,40 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor:Colors.white,
+            scaffoldBackgroundColor:Color(0xffFAF9F6),
+            secondaryHeaderColor:Colors.white ,
+            focusColor: Colors.grey.withOpacity(0.1),
             highlightColor: Colors.black,
-              textTheme: TextTheme(
+            textTheme: TextTheme(
                 titleMedium: GoogleFonts.poppins(color: Colors.black,fontWeight: FontWeight.bold,fontSize:40.sp),
                 titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),
+                headlineMedium: GoogleFonts.poppins(color:Colors.black87),
+                headlineSmall: GoogleFonts.poppins(color: Colors.black87),
               ),
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: Colors.black87,
+              selectionColor: Colors.black87, // Color of the text highlight when selecting
+              selectionHandleColor: Colors.black87, // Color of the little bubbles under the selection
+            ),
 
           ),
          darkTheme: ThemeData.dark().copyWith(
-           scaffoldBackgroundColor:Colors.black,
+           scaffoldBackgroundColor:Color(0xff181818),
+           secondaryHeaderColor:  Color(0xff202020),
+           focusColor:Color(0xff2C2C2C),
            highlightColor: Colors.white,
            textTheme: TextTheme(
              titleMedium: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.bold,fontSize:40.sp),
              titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),
+             headlineMedium: GoogleFonts.poppins(color: Color(0xffF2F2F2)),
+             headlineSmall: GoogleFonts.poppins(color: Colors.white),
            ),
+           textSelectionTheme: const TextSelectionThemeData(
+             cursorColor: Colors.grey,
+             selectionColor: Colors.grey, // Color of the text highlight when selecting
+             selectionHandleColor: Colors.grey, // Color of the little bubbles under the selection
+           ),
+
          ),
          themeMode: ThemeMode.system,
          home:Splashscreen(),

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Provider/Providers.dart';
 import '../data/IntroScreenList.dart';
+import 'SignInPage.dart';
 
 class Intorscreen extends ConsumerWidget {
   final PageController _pageController = PageController();
@@ -63,7 +64,7 @@ class Intorscreen extends ConsumerWidget {
                       _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
                     }
                     else{
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInpage()));
                     }
                   },
                   child: Container(
