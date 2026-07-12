@@ -32,8 +32,8 @@ class _SplashscreenState extends State<Splashscreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xff43E97B),
-              Color(0xff38F9D7),
+              Color(0xFF59C76E), // Brighter green on the left
+              Color(0xFF4CB493)
              ],
             begin: AlignmentGeometry.topLeft,
             end: AlignmentGeometry.bottomRight,
