@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Textformfieldwidget extends StatelessWidget{
-  const Textformfieldwidget({required this.prefixicon, required this.isObscure,super.key});
-
+  const Textformfieldwidget({this.suffixicon,required this.prefixicon, required this.isObscure,super.key});
+  final Icon ? suffixicon;
   final bool isObscure;
   final Icon prefixicon;
   @override
@@ -20,6 +20,7 @@ class Textformfieldwidget extends StatelessWidget{
           vertical: 15.h,   // Decreasing this lowers the height
         ),
         prefixIcon: prefixicon,
+        suffixIcon: suffixicon,
         filled: true,
         fillColor: Theme.of(context).focusColor,
         enabledBorder: OutlineInputBorder(
@@ -30,7 +31,7 @@ class Textformfieldwidget extends StatelessWidget{
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
             color: Color(0xff00D100),
-            width: 3
+            width: 2
           ),
         ),
       ),

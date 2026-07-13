@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shopnest/Provider/Providers.dart';
 import 'package:shopnest/screens/SignUpPage.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
 
@@ -9,13 +11,14 @@ import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 
-class SignInpage extends StatelessWidget {
+class SignInpage extends ConsumerWidget {
   SignInpage({super.key});
 
   final _formstate = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    bool _isObscure=ref.watch(ObscureProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
@@ -36,6 +39,15 @@ class SignInpage extends StatelessWidget {
                     height: 80.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
+                        // 1. This adds the glowing effect behind the button
+                        boxShadow: [
+                    BoxShadow(
+                    color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
+                    blurRadius: 20, // High blur gives that soft "lighting" effect
+                    spreadRadius: 4, // How far the glow extends
+                    offset: const Offset(0, 5), // Moves the glow slightly downwards
+                  ),
+                    ],
                       gradient: LinearGradient(
                         colors: [ Color(0xFF59C76E), // Brighter green on the left
                           Color(0xFF4CB493)],
@@ -121,15 +133,77 @@ class SignInpage extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                               child: Textformfieldwidget(
-                                isObscure: true,
+                                isObscure: _isObscure,
                                 prefixicon: Icon(Icons.lock_open_sharp),
+                                suffixicon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),
                               ),
                             ),
-                            SizedBox(height: 20.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Textbuttongreen(OnTap: (){},textsize: 15.sp,text: "Forgot Password?",),
+                              ],
+                            ),
+                            SizedBox(height: 10.h,),
                             Center(
                               child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
                             ),
-                            SizedBox(height: 20.h,)
+                            // devider with or continuew with option
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+                              child: Row(
+                                children: [
+                                  // Left side line
+                                  const Expanded(
+                                    child: Divider(
+                                      color: Colors.grey, // Adjust color to match your dark background tint
+                                      thickness: 1.0,     // Set the thickness of the line
+                                    ),
+                                  ),
+
+                                  // Middle Text
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                    child: Text(
+                                      'or continue with',
+                                      style: TextStyle(
+                                        color: Colors.grey[400], // Faded grey color text
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Right side line
+                                  const Expanded(
+                                    child: Divider(
+                                      color: Colors.grey,
+                                      thickness: 1.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 5.h,),
+                            // Continue as text Button..
+                            Center(
+                              child: InkWell(
+                                onTap: (){},
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  width: 310.w,
+                                  height: 50.h,
+                                  decoration:BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color: Colors.green,width: 2),
+                                  ) ,
+                                  child: Center(
+                                    child: Text("Continue as Guest",style: GoogleFonts.poppins(color: Colors.green,fontWeight: FontWeight.bold,fontSize:18.sp),
+                                  ),
+                                ),
+                              )),
+                            ),
+                            SizedBox(height: 10.h,),
                           ],
                         ),
                       ),

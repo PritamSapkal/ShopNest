@@ -17,10 +17,19 @@ class Greenbutton extends StatelessWidget {
         height:ButtonHeight,
         width: ButtonWidth,
         decoration: BoxDecoration(
+          // 1. This adds the glowing effect behind the button
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
+                blurRadius: 20, // High blur gives that soft "lighting" effect
+                spreadRadius: 2, // How far the glow extends
+                offset: const Offset(0, 5), // Moves the glow slightly downwards
+              ),
+            ],
             gradient: LinearGradient(
               colors: [
-                Color(0xFF59C76E), // Brighter green on the left
-                Color(0xFF4CB493)
+                Color(0xFF52C47E), // Lighter green
+                Color(0xFF3CA88B), // Cyan/Teal green
               ],
               begin: AlignmentGeometry.centerLeft,
               end: AlignmentGeometry.centerRight,

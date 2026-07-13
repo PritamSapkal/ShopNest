@@ -37,6 +37,14 @@ class SignUppage extends StatelessWidget{
                         begin: AlignmentGeometry.topLeft,
                         end: AlignmentGeometry.bottomRight,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
+                          blurRadius: 20, // High blur gives that soft "lighting" effect
+                          spreadRadius: 4, // How far the glow extends
+                          offset: const Offset(0, 5), // Moves the glow slightly downwards
+                        ),
+                      ],
                     ),
                     child: Center(
                       child: FaIcon(
