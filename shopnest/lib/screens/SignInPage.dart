@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/Provider/Providers.dart';
+import 'package:shopnest/screens/DashBoardScreen.dart';
 import 'package:shopnest/screens/SignUpPage.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
 
@@ -155,7 +156,14 @@ class SignInpage extends ConsumerWidget {
                             SizedBox(height: 10.h,),
                             //Sign in Button
                             Center(
-                              child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
+                              child: Greenbutton(onTap: (){
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => Dashboardscreen(),
+                                  ),
+                                );
+                              },ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
                             ),
                             // devider with or continuew with option
                             Padding(

@@ -168,7 +168,14 @@ class SignUppage extends ConsumerWidget{
                             SizedBox(height: 20.h),
                             //Sign up Button
                             Center(
-                              child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Create Account", textsize: 17.sp),
+                              child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Create Account", textsize: 17.sp,onTap: (){
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => SignInpage(),
+                                  ),
+                                );
+                              },),
                             ),
                             SizedBox(height: 20.h,)
                           ],

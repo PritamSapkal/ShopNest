@@ -3,16 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Greenbutton extends StatelessWidget {
-   Greenbutton({required this.ButtonHeight, required this.ButtonWidth,required this.title,required this.textsize,super.key});
+   Greenbutton({required this.ButtonHeight, required this.ButtonWidth,required this.title,required this.textsize,required this.onTap,super.key});
    final double ButtonHeight;
    final double ButtonWidth;
    final String title;
    final double textsize;
+   final VoidCallback  onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: () {},
+      onTap:(){
+        onTap();
+      },
       child: Container(
         height:ButtonHeight,
         width: ButtonWidth,

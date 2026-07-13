@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+
+          // Light Theme
           theme: ThemeData.light().copyWith(
             scaffoldBackgroundColor:Colors.white,
             secondaryHeaderColor:Colors.white ,
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
             ),
 
           ),
+
+         // Dark Theme
          darkTheme: ThemeData.dark().copyWith(
            scaffoldBackgroundColor:Colors.black,
            secondaryHeaderColor: Color(0xff181818),
@@ -56,6 +60,8 @@ class MyApp extends StatelessWidget {
            ),
 
          ),
+
+         // Theme Mode
          themeMode: ThemeMode.system,
          home:Splashscreen(),
         );
