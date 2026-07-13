@@ -39,9 +39,10 @@ class Intorscreen extends ConsumerWidget {
               child: SmoothPageIndicator(
                 controller: _pageController,
                 count: IntrocomponentList.length,
-                effect: WormEffect(activeDotColor: Colors.greenAccent,
+                effect: WormEffect(activeDotColor: Colors.green,
                   dotColor: Colors.grey,
-
+                  radius: 10,
+                  dotHeight: 13,dotWidth: 13
                 ),
                 onDotClicked: (index) {
                   _pageController.animateToPage(
@@ -55,7 +56,7 @@ class Intorscreen extends ConsumerWidget {
           ),
           //NextButton
           Positioned(
-            bottom: 30.h,
+            bottom: 40.h,
             child: Center(
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
@@ -71,8 +72,23 @@ class Intorscreen extends ConsumerWidget {
                     width: 300.w,
                     height: 50.h,
                     decoration: BoxDecoration(
-                      color: Color(0xff20c93b),
-                      borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
+                            blurRadius: 20, // High blur gives that soft "lighting" effect
+                            spreadRadius: 2, // How far the glow extends
+                            offset: const Offset(0, 5), // Moves the glow slightly downwards
+                          ),
+                        ],
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF52C47E), // Lighter green
+                            Color(0xFF3CA88B), // Cyan/Teal green
+                          ],
+                          begin: AlignmentGeometry.centerLeft,
+                          end: AlignmentGeometry.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20)
                     ),
                     child: Center(
                         child: Text(

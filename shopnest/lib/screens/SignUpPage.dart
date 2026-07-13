@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../Provider/Providers.dart';
 import '../widgets/GreenButton.dart';
 import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 import 'SignInPage.dart';
 
-class SignUppage extends StatelessWidget{
+class SignUppage extends ConsumerWidget{
   final _formstate = GlobalKey<FormState>();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    var _isObscure=ref.watch(SignUpPageObscureProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
@@ -139,8 +142,12 @@ class SignUppage extends StatelessWidget{
                             Padding(
                                 padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                               child: Textformfieldwidget(
-                                isObscure: true,
+                                isObscure: _isObscure,
                                 prefixicon: Icon(Icons.security),
+                                suffixicon: IconButton(onPressed: (){
+                                  if(_isObscure)ref.read(SignUpPageObscureProvider.notifier).update((state)=>false);
+                                  else ref.read(SignUpPageObscureProvider.notifier).update((state)=>true);
+                                }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,)),
                               ),
                             ),
 
@@ -153,7 +160,7 @@ class SignUppage extends StatelessWidget{
                             Padding(
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                               child: Textformfieldwidget(
-                                isObscure: true,
+                                isObscure: _isObscure,
                                 prefixicon: Icon(Icons.security),
                               ),
                             ),

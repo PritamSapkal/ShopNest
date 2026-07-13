@@ -135,9 +135,17 @@ class SignInpage extends ConsumerWidget {
                               child: Textformfieldwidget(
                                 isObscure: _isObscure,
                                 prefixicon: Icon(Icons.lock_open_sharp),
-                                suffixicon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),
+                                suffixicon: IconButton(onPressed: (){
+                                  if(_isObscure){
+                                    ref.read(ObscureProvider.notifier).update((state)=>false);
+                                  }
+                                  else{
+                                    ref.read(ObscureProvider.notifier).update((state)=>true);
+                                  }
+                                }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),),
                               ),
                             ),
+                            // Forgot Password Text Button
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -145,6 +153,7 @@ class SignInpage extends ConsumerWidget {
                               ],
                             ),
                             SizedBox(height: 10.h,),
+                            //Sign in Button
                             Center(
                               child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
                             ),

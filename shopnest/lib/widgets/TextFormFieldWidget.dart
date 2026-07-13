@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Textformfieldwidget extends StatelessWidget{
   const Textformfieldwidget({this.suffixicon,required this.prefixicon, required this.isObscure,super.key});
-  final Icon ? suffixicon;
+  final IconButton ? suffixicon;
   final bool isObscure;
   final Icon prefixicon;
   @override

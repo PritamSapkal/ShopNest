@@ -6,3 +6,6 @@ var IntroIndexProvider=StateProvider<int>((ref){
 var ObscureProvider= StateProvider<bool>((ref){
   return true;
 });
+var SignUpPageObscureProvider=StateProvider<bool>((ref){
+  return true;
+});
