@@ -18,7 +18,7 @@ enum ItemCategory {
 class CategoryUiProps {
   CategoryUiProps({required this.name,required this.icon,required this.baseColor,required this.backgroundColor});
   final String name;
-  final Icon icon;
+  final IconData icon;
   final Color baseColor;
   final Color backgroundColor;
 }

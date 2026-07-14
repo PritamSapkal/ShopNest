@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/legacy.dart';
 import '../DataModel/ItemModel.dart';
 import '../data/ItemList.dart';
 
-class Itemlistprovider extends StateNotifier<List<Itemmodel>>{
-  Itemlistprovider():super(dummyShoppingList);
+class ItemlistproviderClass extends StateNotifier<List<Itemmodel>>{
+  ItemlistproviderClass():super(dummyShoppingList);
 
   void getCategoryList(String category){
     List<Itemmodel> filteredList=dummyShoppingList;
@@ -14,6 +14,6 @@ class Itemlistprovider extends StateNotifier<List<Itemmodel>>{
   }
 }
 
-var ItemList=StateNotifierProvider<Itemlistprovider,List<Itemmodel>>((ref){
-return Itemlistprovider();
+var ItemListProvider=StateNotifierProvider<ItemlistproviderClass,List<Itemmodel>>((ref){
+return ItemlistproviderClass();
 });

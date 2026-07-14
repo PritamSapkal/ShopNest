@@ -23,3 +23,7 @@ var bottomAppbarindexProvider=StateProvider<int>((ref){
 var CategoryListProvider =Provider<Map<ItemCategory, CategoryUiProps>>((ref){
   return categoryDetails;
 });
+// Horizantal listview of category button provider for highlight
+var CategoryButtonSelectedProvider=StateProvider<String>((ref){
+  return "All";
+});
