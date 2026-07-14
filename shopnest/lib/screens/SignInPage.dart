@@ -215,7 +215,7 @@ class SignInpage extends ConsumerWidget {
                                     border: Border.all(color: Colors.green,width: 2),
                                   ) ,
                                   child: Center(
-                                    child: Text("Continue as Guest",style: GoogleFonts.poppins(color: Colors.green,fontWeight: FontWeight.bold,fontSize:18.sp),
+                                    child: Text("Continue as Guest",style: GoogleFonts.poppins(color: Colors.green,fontWeight: FontWeight.bold,fontSize:15.sp),
                                   ),
                                 ),
                               )),

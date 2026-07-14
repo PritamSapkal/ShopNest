@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor:Colors.white,
             secondaryHeaderColor:Colors.white ,
             focusColor: Color(0xffF2F2F2),
+            iconTheme:IconThemeData(
+              color: Colors.black,
+            ) ,
             textTheme: TextTheme(
                 titleMedium: GoogleFonts.poppins(color: Colors.black,fontWeight: FontWeight.bold,fontSize:40.sp),
                 titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),
@@ -62,7 +65,9 @@ class MyApp extends StatelessWidget {
            scaffoldBackgroundColor:Colors.black,
            secondaryHeaderColor: Color(0xff181818),
            focusColor: Color(0xff202020),
-
+             iconTheme:IconThemeData(
+               color: Colors.white,
+             ) ,
            textTheme: TextTheme(
              titleMedium: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.bold,fontSize:40.sp),
              titleSmall: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 20.sp),

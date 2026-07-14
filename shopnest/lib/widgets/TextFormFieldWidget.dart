@@ -31,7 +31,7 @@ class Textformfieldwidget extends StatelessWidget{
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
             color: Color(0xff00D100),
-            width: 2
+            width: 1,
           ),
         ),
       ),
