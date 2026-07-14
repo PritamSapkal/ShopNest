@@ -15,7 +15,7 @@ final List<Itemmodel> dummyShoppingList = [
   ),
   Itemmodel(
     name: 'Whole Milk',
-    category: categoryDetails[ItemCategory.dairyAndEggs]!,
+    category: categoryDetails[ItemCategory.dairyAndEggs]!!,
     quantity: 1,
     notes: '3.5% fat content',
     status: false,
