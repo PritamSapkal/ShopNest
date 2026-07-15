@@ -75,8 +75,8 @@ class Intorscreen extends ConsumerWidget {
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
-                            blurRadius: 20, // High blur gives that soft "lighting" effect
-                            spreadRadius: 2, // How far the glow extends
+                            blurRadius: 15, // High blur gives that soft "lighting" effect
+                            spreadRadius: 1, // How far the glow extends
                             offset: const Offset(0, 5), // Moves the glow slightly downwards
                           ),
                         ],

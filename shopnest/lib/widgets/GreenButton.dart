@@ -24,9 +24,9 @@ class Greenbutton extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
-                blurRadius: 20, // High blur gives that soft "lighting" effect
-                spreadRadius: 2, // How far the glow extends
-                offset: const Offset(0, 5), // Moves the glow slightly downwards
+                blurRadius: 10, // High blur gives that soft "lighting" effect
+                spreadRadius: 0.5, // How far the glow extends
+                offset: const Offset(0, 2), // Moves the glow slightly downwards
               ),
             ],
             gradient: LinearGradient(

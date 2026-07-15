@@ -7,6 +7,8 @@ import 'package:shopnest/screens/HomeScreen.dart';
 
 import '../Provider/Providers.dart';
 import '../widgets/EmptyScreen.dart';
+import 'CategoriesScreen.dart';
+import 'SetteingScreen.dart';
 
 class Dashboardscreen extends ConsumerStatefulWidget {
   const Dashboardscreen({super.key});
@@ -56,8 +58,14 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
         ),
       ),
 
-
-      body:Homescreen(),
+      body: IndexedStack(
+      index: _selectedIndex,
+      children: [
+        Homescreen(),
+        Categoriesscreen(),
+        Setteingscreen(),
+      ],
+    ),
 
       // Borttom navigation App bar
       bottomNavigationBar: BottomNavigationBar(
