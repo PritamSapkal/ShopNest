@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../DataModel/CategoryUiProps.dart';
 import '../DataModel/ItemModel.dart';
-import '../Provider/ItemListProvider.dart';
+import '../Provider/FilteredListProvider.dart';
 import '../Provider/Providers.dart';
 import 'ItemCard.dart';
 import 'TextButtonGreen.dart';
@@ -13,10 +14,12 @@ import 'TextButtonGreen.dart';
 class CategoryAndItemList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Itemmodel> itemList= ref.watch(ItemListProvider);// Item List
+    // Filtered List
+    List<Itemmodel> itemList= ref.watch(FilterListProvider).FilteredList;
+    // Selected Category name
+    var _selectedCategory=ref.watch(FilterListProvider).SelectedCategory;
     Map<ItemCategory, CategoryUiProps> _CategoryMap = ref.watch(CategoryListProvider,);
     List<ItemCategory> keyList = _CategoryMap.keys.toList();
-    var _selectedCategory=ref.watch(CategoryButtonSelectedProvider);
     return Column(
       children: [
         // Horizontal Category List View
@@ -31,7 +34,7 @@ class CategoryAndItemList extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: InkWell(
                   onTap: (){
-                    ref.read(CategoryButtonSelectedProvider.notifier).update((state)=>mapitem.name);
+                   ref.read(FilterListProvider.notifier).updateCategoryFilter(mapitem.name);
                   },
                   borderRadius: BorderRadius.circular(20.r),
                   child: AnimatedContainer(duration: Duration(milliseconds:400),
@@ -73,15 +76,34 @@ class CategoryAndItemList extends ConsumerWidget {
 
         SizedBox(height: 10.h,),
 
-        // Item List
+        // Item List wrapped with Staggered Animations
         Expanded(
-          child: Container(
-            width:double.infinity,
-            child: ListView.builder(itemBuilder: (context,index){
-              return Padding(
-                  padding: EdgeInsetsGeometry.all(10),
-                  child: Itemcard(currentitemm: itemList[index]));
-            },itemCount:itemList.length,),
+          child: SizedBox(
+            width: double.infinity,
+            child: AnimationLimiter(
+              key: ValueKey<String>(_selectedCategory),
+              child: ListView.builder(
+                key: ValueKey<String>(_selectedCategory),
+                physics: const BouncingScrollPhysics(), // Gives a premium, smooth scrolling feel
+                itemCount: itemList.length,
+                itemBuilder: (context, index) {
+                  // 2. Configure the sequential item stagger timing
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    child: SlideAnimation(
+                      verticalOffset: 50.0, // Softly floats the item upward from below
+                      child: FadeInAnimation(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10), // Fixed the typo from 'EdgeInsetsGeometry' to 'EdgeInsets'
+                          child: Itemcard(currentitemm: itemList[index]),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         )
       ],

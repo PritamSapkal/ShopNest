@@ -37,7 +37,7 @@ class _CategoriesscreenState extends ConsumerState<Categoriesscreen>
   @override
   Widget build(BuildContext context) {
     _animationController.reset();
-    _animationController.forward(from: 0.5);
+    _animationController.forward(from: 0.4);
     final Map<ItemCategory, CategoryUiProps> CategoryMap= ref.watch(CategoryListProvider);
     List<ItemCategory> KeyList= CategoryMap.keys.toList();
     return FadeTransition(

@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../DataModel/CategoryUiProps.dart';
+import '../DataModel/ItemModel.dart';
 import '../data/ItemCategory.dart';
+import '../data/ItemList.dart';
 // Handle the intro screen page index
 var IntroIndexProvider=StateProvider<int>((ref){
   return 0;
@@ -26,4 +28,8 @@ var CategoryListProvider =Provider<Map<ItemCategory, CategoryUiProps>>((ref){
 // Horizantal listview of category button provider for highlight
 var CategoryButtonSelectedProvider=StateProvider<String>((ref){
   return "All";
+});
+// All List Item Provider
+var AllItemListProvider=Provider<List<Itemmodel>>((ref){
+  return dummyShoppingList;
 });
