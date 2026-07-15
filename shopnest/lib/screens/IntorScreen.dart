@@ -65,7 +65,7 @@ class Intorscreen extends ConsumerWidget {
                       _pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
                     }
                     else{
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInpage()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInpage()));
                     }
                   },
                   child: Container(

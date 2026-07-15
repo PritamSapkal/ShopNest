@@ -15,22 +15,16 @@ class Categoriesscreen extends ConsumerStatefulWidget {
 class _CategoriesscreenState extends ConsumerState<Categoriesscreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late Animation _animation;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds:400),
     );
-    _animation = Tween<double>(
-      begin: 0.2,
-      end: 1.0,
-    ).animate(_animationController);
-    _animationController.addListener(() {
-      setState(() {});
-    });
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0, ).animate(_animationController);
     _animationController.forward();
   }
 
@@ -42,12 +36,12 @@ class _CategoriesscreenState extends ConsumerState<Categoriesscreen>
   }
   @override
   Widget build(BuildContext context) {
+    _animationController.reset();
+    _animationController.forward(from: 0.5);
     final Map<ItemCategory, CategoryUiProps> CategoryMap= ref.watch(CategoryListProvider);
     List<ItemCategory> KeyList= CategoryMap.keys.toList();
-    return AnimatedOpacity(
-      opacity: _animation.value,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.linear,
+    return FadeTransition(
+      opacity: _fadeAnimation,
       child: SizedBox(
         width: double.infinity,
         child:Column(
@@ -62,7 +56,7 @@ class _CategoriesscreenState extends ConsumerState<Categoriesscreen>
             Expanded(
               child: SizedBox(
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 0,crossAxisSpacing: 0),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 0,crossAxisSpacing: 0,),
                   itemBuilder: (context, index) {
                     var currentCategory=KeyList[index+1];
                     return Categorycontainer(currentKey: currentCategory,);
