@@ -75,8 +75,23 @@ class CategoryAndItemList extends ConsumerWidget {
         ),
 
         SizedBox(height: 10.h,),
-
+        itemList.isEmpty?Spacer():SizedBox.shrink(),
         // Item List wrapped with Staggered Animations
+        itemList.isEmpty?
+            // empty text if teh list is teh empty
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "We couldn't find any products in this category right now.",
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ):
+        // Item List
         Expanded(
           child: SizedBox(
             width: double.infinity,
@@ -105,7 +120,9 @@ class CategoryAndItemList extends ConsumerWidget {
               ),
             ),
           ),
-        )
+        ),
+
+        itemList.isEmpty?Spacer():SizedBox.shrink(),
       ],
     );
   }

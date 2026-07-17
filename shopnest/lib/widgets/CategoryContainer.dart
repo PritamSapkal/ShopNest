@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../DataModel/CategoryUiProps.dart';
 import '../data/ItemCategory.dart';
+import '../screens/SpecificCategoryItemListScreen.dart';
 
-class Categorycontainer extends StatelessWidget {
+class Categorycontainer extends ConsumerWidget {
   Categorycontainer({required this.currentKey});
 
-  var currentKey;
+  ItemCategory  currentKey;
   late CategoryUiProps Currentcategory = categoryDetails[currentKey]!;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
       child: InkWell(
-        onTap: (){},
+        onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>categoryitemScreen(MapKey: currentKey)));
+        },
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -28,40 +31,43 @@ class Categorycontainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // First Conatiner shows teh category icon
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Currentcategory.baseColor,
-                      Color.alphaBlend(
-                        Colors.white.withOpacity(0.45), // Mixes 35% white overlay into it
-                        Currentcategory.baseColor,
-                      ),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+              Hero(
+                tag:currentKey,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Currentcategory.baseColor,
+                        Color.alphaBlend(
+                          Colors.white.withOpacity(0.45), // Mixes 35% white overlay into it
+                          Currentcategory.baseColor,
+                        ),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
                   ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.r),
-                    topRight: Radius.circular(20.r),
-                  ),
-                ),
-                child: Center(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical:30 ),
-                        child: Icon(
-                          Currentcategory.icon,
-                          color: Colors.white,
-                          size: 40.sp,
+                  child: Center(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical:30 ),
+                          child: Icon(
+                            Currentcategory.icon,
+                            color: Colors.white,
+                            size: 40.sp,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                ),
               ),
               Padding(padding:EdgeInsetsGeometry.symmetric(horizontal: 10),child: Text(Currentcategory.name,style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 13.sp),)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text("6 Products",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w600,fontSize: 12.sp),textAlign: TextAlign.left,),
+                child: Text("6  Products",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w600,fontSize: 12.sp),textAlign: TextAlign.left,),
               ),
             ],
           ),

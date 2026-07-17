@@ -52,13 +52,15 @@ class _CategoriesscreenState extends ConsumerState<Categoriesscreen>
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               child: Text("All Categories",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w600,fontSize: 12.sp),textAlign: TextAlign.left,),
             ),
+
+
             // Category gridView
             Expanded(
               child: SizedBox(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 0,crossAxisSpacing: 0,),
                   itemBuilder: (context, index) {
-                    var currentCategory=KeyList[index+1];
+                    ItemCategory currentCategory=KeyList[index+1];
                     return Categorycontainer(currentKey: currentCategory,);
                   },
                  physics: ClampingScrollPhysics(),
