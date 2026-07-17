@@ -20,7 +20,42 @@ class Dashboardscreen extends ConsumerStatefulWidget {
 class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
   @override
   Widget build(BuildContext context) {
+
     var _selectedIndex=ref.watch(bottomAppbarindexProvider);// Bottom App Bar Index
+    Widget appbarwidget= Column(
+     crossAxisAlignment: CrossAxisAlignment.start,
+     children: [
+       Text(
+         'Good Morning 👋',
+         style: Theme
+             .of(context)
+             .textTheme
+             .headlineSmall!
+             .copyWith(
+           fontSize: 10.sp,
+           color: Colors.grey,
+         ),
+       ),
+       Text(
+         "Pritam Sapkal",
+         style: Theme
+             .of(
+           context,
+         )
+             .textTheme
+             .titleMedium!
+             .copyWith(fontSize: 15.sp),
+       ),
+       SizedBox(height: 5.h),
+     ],
+   );// Default app bar widget
+    if(_selectedIndex==1){
+     appbarwidget=Text("Categories",style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize:18.sp),);
+    }// for category page appbar Widget
+    else if(_selectedIndex==2){
+      appbarwidget=Text("Settings",style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize:18.sp),);
+    }// for Settings Page App bar widget
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       //AppBar
@@ -29,33 +64,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
             .of(context)
             .appBarTheme
             .backgroundColor,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Good Morning 👋',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(
-                fontSize: 10.sp,
-                color: Colors.grey,
-              ),
-            ),
-            Text(
-              "Pritam Sapkal",
-              style: Theme
-                  .of(
-                context,
-              )
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontSize: 15.sp),
-            ),
-            SizedBox(height: 5.h),
-          ],
-        ),
+        title:appbarwidget,
       ),
 
       body: IndexedStack(

@@ -80,17 +80,17 @@ class CategoryAndItemList extends ConsumerWidget {
         itemList.isEmpty?
             // empty text if teh list is teh empty
         Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "We couldn't find any products in this category right now.",
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
-              textAlign: TextAlign.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "We couldn't find any products in this category right now.",
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ):
+          ):
         // Item List
         Expanded(
           child: SizedBox(
