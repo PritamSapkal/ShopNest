@@ -21,7 +21,7 @@ class AppearanceWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Row(
           children: [
 
