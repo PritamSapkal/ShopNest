@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopnest/screens/Add_New_item_screen.dart';
 import '../widgets/Category_Item_List.dart';
 import '../widgets/SearchBar.dart';
 
@@ -9,7 +10,9 @@ class Homescreen extends StatelessWidget {
     return Scaffold(
       // Floating Action Button to add new Item
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewItemScreen()));
+        },
         backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         elevation: 2,

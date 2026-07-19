@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/SignInPage.dart';
-
+import '../Provider/Providers.dart';
 import '../Provider/ThemeProvider.dart';
 import '../SharedPreferencess/AppThemePref.dart';
 import '../widgets/AppearanceWidget.dart';
@@ -229,6 +229,7 @@ class Setteingscreen extends ConsumerWidget {
               //Logout Button
               InkWell(
                 onTap: (){
+                  ref.read(bottomAppbarindexProvider.notifier).update((state)=>0);
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInpage()));
                 },
                 child: Container(
