@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Provider/ThemeProvider.dart';
+import '../SharedPreferencess/AppThemePref.dart';
+import '../widgets/AppearanceWidget.dart';
 import '../widgets/CustomeBackgroundContainer.dart';
 
-class Setteingscreen extends StatelessWidget {
+class Setteingscreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeProvider);
     return Scaffold(
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
@@ -16,7 +20,7 @@ class Setteingscreen extends StatelessWidget {
           padding: EdgeInsetsGeometry.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Name & Email Address Container // ShopenestIcon cart Container
               Customebackgroundcontainer(
@@ -75,6 +79,56 @@ class Setteingscreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10.h,),
+              // Appearance Text
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                child: Text("Appearance",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w600,fontSize: 12.sp),textAlign: TextAlign.left,),
+              ),
+              // Theme Options
+              Customebackgroundcontainer(childwidget: Column(
+                  children: [
+                    // Light Mode
+                    AppearanceWidget(
+                      icon: const Icon(Icons.wb_sunny_outlined,color: Colors.orangeAccent,),
+                      settingName: "Light Theme",
+
+                      isSelected: currentTheme == AppTheme.light,
+
+                      onTap: () {
+                        ref.read(themeProvider.notifier)
+                            .changeTheme(AppTheme.light);
+                      },
+                    ),
+                    Divider(),
+                    // Dark Mode
+                    AppearanceWidget(
+                      icon: const Icon(Icons.dark_mode_outlined,color: Colors.blueAccent,),
+                      settingName: "Dark Theme",
+
+                      isSelected: currentTheme == AppTheme.dark,
+
+                      onTap: () {
+                        ref.read(themeProvider.notifier)
+                            .changeTheme(AppTheme.dark);
+                      },
+                    ),
+                    Divider(),
+                    //System Default Mode
+                    AppearanceWidget(
+                      icon: const Icon(Icons.phone_android,color: Colors.grey,),
+                      settingName: "System Theme",
+                      isSelected: currentTheme == AppTheme.system,
+
+                      onTap: () {
+                        ref.read(themeProvider.notifier)
+                            .changeTheme(AppTheme.system);
+                      },
+                    ),
+
+                  ],
+              )),
+
+
             ],
           ),
         ),

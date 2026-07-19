@@ -4,15 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/SplashScreen.dart';
 
+import 'Provider/ThemeProvider.dart';
+import 'SharedPreferencess/AppThemePref.dart';
+
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
   return runApp(ProviderScope(child: MyApp()));
 }
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return ScreenUtilInit(
       designSize: const Size(360, 800),
       minTextAdapt: true,
@@ -90,7 +93,11 @@ class MyApp extends StatelessWidget {
          ),
 
          // Theme Mode
-         themeMode: ThemeMode.system,
+          themeMode: switch (ref.watch(themeProvider)) {
+            AppTheme.light => ThemeMode.light,
+            AppTheme.dark => ThemeMode.dark,
+            AppTheme.system => ThemeMode.system,
+          },
          home:Splashscreen(),
         );
       },

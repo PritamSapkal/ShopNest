@@ -46,6 +46,7 @@ dependencies:
   uuid: ^4.5.3
   intl: ^0.20.3
   flutter_staggered_animations: ^1.1.1
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   flutter_test:
