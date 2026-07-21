@@ -108,7 +108,7 @@ class SignUppage extends ConsumerWidget{
                             //Full Name label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Full Name"),
+                              child: Textfieldlabel(label: "Full Name",fontsize: 15,),
                             ),
                             //Full Name Textfield
                             Padding(
@@ -122,7 +122,7 @@ class SignUppage extends ConsumerWidget{
                             //Email Address label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Email Address"),
+                              child: Textfieldlabel(label: "Email Address",fontsize: 15,),
                             ),
                             //Email Address Textfield
                             Padding(
@@ -136,7 +136,7 @@ class SignUppage extends ConsumerWidget{
                             //Password label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Password"),
+                              child: Textfieldlabel(label: "Password",fontsize: 15,),
                             ),
                             //Password Textfield
                             Padding(
@@ -154,7 +154,7 @@ class SignUppage extends ConsumerWidget{
                             //Confirm Password label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Confirm Password"),
+                              child: Textfieldlabel(label: "Confirm Password",fontsize: 15,),
                             ),
                             //Confirm Password Textfield
                             Padding(

@@ -209,7 +209,7 @@ class Setteingscreen extends ConsumerWidget {
                         "Vesrion",
                         style: Theme.of(
                           context,
-                        ).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
+                        ).textTheme.titleMedium!.copyWith(fontSize: 14.sp),
                       ),
                       Spacer(),
                       Padding(

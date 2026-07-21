@@ -32,7 +32,7 @@ class AppearanceWidget extends StatelessWidget {
 
             Text(
               settingName,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 14.sp),
             ),
 
             const Spacer(),

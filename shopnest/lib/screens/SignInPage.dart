@@ -112,10 +112,10 @@ class SignInpage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            //label
+                            //Email label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Email Address"),
+                              child: Textfieldlabel(label: "Email Address",fontsize: 15,),
                             ),
                             //EMAIL Textfield
                             Padding(
@@ -125,10 +125,10 @@ class SignInpage extends ConsumerWidget {
                                 prefixicon: Icon(Icons.mail_outline_sharp),
                               ),
                             ),
-                            //label
+                            //Password label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Password"),
+                              child: Textfieldlabel(label: "Password",fontsize: 15,),
                             ),
                             //Password Textfield
                             Padding(

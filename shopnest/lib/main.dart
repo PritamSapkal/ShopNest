@@ -34,6 +34,7 @@ class MyApp extends ConsumerWidget {
             scaffoldBackgroundColor:Colors.white,
             secondaryHeaderColor:Colors.white ,
             focusColor: Color(0xffF2F2F2),
+            cardColor: Colors.white,
             iconTheme:IconThemeData(
               color: Colors.black,
             ) ,
@@ -68,6 +69,7 @@ class MyApp extends ConsumerWidget {
            scaffoldBackgroundColor:Colors.black,
            secondaryHeaderColor: Color(0xff181818),
            focusColor: Color(0xff202020),
+             cardColor: Color(0xff202020) ,
              iconTheme:IconThemeData(
                color: Colors.white,
              ) ,
