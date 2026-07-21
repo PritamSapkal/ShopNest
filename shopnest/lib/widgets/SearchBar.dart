@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Searchbar extends StatelessWidget{
+import '../Provider/FilteredListProvider.dart';
+
+class Searchbar extends ConsumerWidget{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Container(
       color: Theme.of(context).appBarTheme.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20,8,20,8),
         child: TextField(
+          onChanged: (value){
+            ref.read(FilterListProvider.notifier).getSerchedItemList(value);
+          },
           cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
           cursorHeight: 20,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 15.sp,fontWeight: FontWeight.normal,),

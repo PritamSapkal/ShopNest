@@ -7,32 +7,40 @@ import '../Provider/Providers.dart'; // Make sure this points to your provider f
 class Filteredlistprovider extends StateNotifier<Filterlistmodel> {
   final Ref _ref;
 
-  // Pass Ref through the constructor
   Filteredlistprovider(this._ref)
       : super(Filterlistmodel(
     FilteredList: _ref.read(AllItemListProvider),
     SelectedCategory: "All",
   ));
 
-  // The function triggered when a category button is clicked
   void updateCategoryFilter(String categoryName) {
-    // 1. Get the latest master copy of all items
     List<Itemmodel>  masterItemsList = _ref.read(AllItemListProvider);
 
     List<Itemmodel> updatedList;
-
-    // 2. Perform filtering logic based on selection
     if (categoryName == "All") {
       updatedList=masterItemsList;
     } else {
-      // Compares item categories (adjust item.category according to your model structure)
       updatedList = masterItemsList.where((item)=>item.category.name.toString().toLowerCase()==categoryName.toString().toLowerCase()).toList();
     }
 
-    // 3. Update the state. Riverpod triggers automatic UI updates upon assignment!
     state = Filterlistmodel(
       FilteredList: updatedList,
       SelectedCategory: categoryName,
+    );
+  }
+  void getSerchedItemList(String item){
+    List<Itemmodel>  masterItemsList = _ref.read(AllItemListProvider);
+    List<Itemmodel> updatedList;
+    if (item == ""|| item.isEmpty) {
+      updatedList=masterItemsList;
+    } else {
+      final searchquery=item.trim().toString().toLowerCase();
+      updatedList = masterItemsList.where((element)=>element.name.toString().toLowerCase().contains(searchquery)).toList();
+    }
+
+    state = Filterlistmodel(
+      FilteredList: updatedList,
+      SelectedCategory:"All",
     );
   }
 }
