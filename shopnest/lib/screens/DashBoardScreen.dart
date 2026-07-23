@@ -66,20 +66,49 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
             .backgroundColor,
         title:appbarwidget,
       ),
-
-      body: PageView(
-        controller: _pageController,
-        children: [
-          Homescreen(),
-          Categoriesscreen(),
-          Setteingscreen(),
+      body:GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          // Detect even a 5px swipe
+          if (details.delta.dx < -5) {
+            // Swiped left -> Next page
+            _pageController.nextPage(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeOutCubic,
+            );
+          } else if (details.delta.dx > 5) {
+            // Swiped right -> Previous page
+            _pageController.previousPage(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeOutCubic,
+            );
+          }
+        },
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(), // Handled manually
+          onPageChanged: (index) {
+            ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
+          },
+          children: [
+            Homescreen(),
+        Categoriesscreen(),
+        Setteingscreen(),
         ],
-        physics: ClampingScrollPhysics(),
+        ),
+      ),
+      /*body: PageView(
+        controller: _pageController,
+        physics:const  PageScrollPhysics(),
         scrollDirection:Axis.horizontal,
         onPageChanged: (index) {
           ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
         },
-      ),
+        children:  [
+          Homescreen(),
+          Categoriesscreen(),
+          Setteingscreen(),
+        ],
+      ),*/
       // Borttom navigation App bar
       bottomNavigationBar: BottomNavigationBar(
           items: [
@@ -98,7 +127,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
           ],
           backgroundColor: Theme.of(context).bottomAppBarTheme.color,
           onTap: (index) {
-           _pageController.animateToPage(index, duration: Duration(milliseconds: 1), curve: Curves.linear);
+           _pageController.animateToPage(index, duration: Duration(milliseconds: 5), curve: Curves.linear);
            ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
           },
           currentIndex: _selectedIndex,// current index
