@@ -98,7 +98,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
           ],
           backgroundColor: Theme.of(context).bottomAppBarTheme.color,
           onTap: (index) {
-           _pageController.animateToPage(index, duration: Duration(milliseconds: 100), curve: Curves.linear);
+           _pageController.animateToPage(index, duration: Duration(milliseconds: 1), curve: Curves.linear);
            ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
           },
           currentIndex: _selectedIndex,// current index

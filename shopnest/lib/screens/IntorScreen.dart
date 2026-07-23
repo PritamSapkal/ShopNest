@@ -32,6 +32,13 @@ class Intorscreen extends ConsumerWidget {
               ref.read(IntroIndexProvider.notifier).update((state) => index);
             },
           ),
+          //Skip TextButton
+          Positioned(
+              right: 20.w,
+              top: 70.h,
+              child: TextButton(onPressed: (){
+               _pageController.animateToPage(3, duration: Duration(milliseconds: 300), curve: Curves.linear);
+              }, child: Text("Skip",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 15.sp),))),
           // Smooth Page Indicator
           Positioned(
             bottom: 110.h,
@@ -42,7 +49,7 @@ class Intorscreen extends ConsumerWidget {
                 effect: WormEffect(activeDotColor: Colors.green,
                   dotColor: Colors.grey,
                   radius: 10,
-                  dotHeight: 13,dotWidth: 13
+                  dotHeight: 10,dotWidth: 10
                 ),
                 onDotClicked: (index) {
                   _pageController.animateToPage(
@@ -54,7 +61,7 @@ class Intorscreen extends ConsumerWidget {
               ),
             ),
           ),
-          //NextButton
+          //NextButton && Finish Button
           Positioned(
             bottom: 40.h,
             child: Center(
