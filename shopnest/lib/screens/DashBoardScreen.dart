@@ -18,9 +18,9 @@ class Dashboardscreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
-
     var _selectedIndex=ref.watch(bottomAppbarindexProvider);// Bottom App Bar Index
     Widget appbarwidget= Column(
      crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,15 +67,19 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
         title:appbarwidget,
       ),
 
-      body: IndexedStack(
-      index: _selectedIndex,
-      children: [
-        Homescreen(),
-        Categoriesscreen(),
-        Setteingscreen(),
-      ],
-    ),
-
+      body: PageView(
+        controller: _pageController,
+        children: [
+          Homescreen(),
+          Categoriesscreen(),
+          Setteingscreen(),
+        ],
+        physics: ClampingScrollPhysics(),
+        scrollDirection:Axis.horizontal,
+        onPageChanged: (index) {
+          ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
+        },
+      ),
       // Borttom navigation App bar
       bottomNavigationBar: BottomNavigationBar(
           items: [
@@ -94,6 +98,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
           ],
           backgroundColor: Theme.of(context).bottomAppBarTheme.color,
           onTap: (index) {
+           _pageController.animateToPage(index, duration: Duration(milliseconds: 100), curve: Curves.linear);
            ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
           },
           currentIndex: _selectedIndex,// current index
