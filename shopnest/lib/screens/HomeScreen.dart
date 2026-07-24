@@ -11,7 +11,7 @@ class Homescreen extends StatelessWidget {
       // Floating Action Button to add new Item
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewItemScreen()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewItemScreen(appbarTitle: "Add Shopping Item",)));
         },
         backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),

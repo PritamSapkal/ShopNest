@@ -11,9 +11,11 @@ import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 
 class AddNewItemScreen extends StatelessWidget{
+  AddNewItemScreen({required this.appbarTitle,super.key});
+  final String appbarTitle;
+  final  _addNewItemformkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    GlobalKey _formkey=GlobalKey<FormState>();
     return Scaffold(
 
       // Add shopping item Appbar
@@ -28,7 +30,7 @@ class AddNewItemScreen extends StatelessWidget{
           ),
         ),
         title: Text(
-          "Add Shopping Item",
+          appbarTitle,
           style: Theme.of(
             context,
           ).textTheme.titleMedium!.copyWith(fontSize: 15.sp),
@@ -39,7 +41,7 @@ class AddNewItemScreen extends StatelessWidget{
         child: SingleChildScrollView(
           physics: ClampingScrollPhysics(),
           child: Form(
-            key: _formkey,
+            key: _addNewItemformkey,
             child: Column(
               children: [
                 //  First Container contains item name and the category  text bar
@@ -60,7 +62,7 @@ class AddNewItemScreen extends StatelessWidget{
                     // Item name Form Field
                     Padding(
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 5),
-                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. Organic Spinach",)),
+                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. Organic Spinach",errormessage: "Enter Item name ",)),
 
                     // Category Text Label
                     Padding(
@@ -74,11 +76,18 @@ class AddNewItemScreen extends StatelessWidget{
                           //  Drop down Button
                       SizedBox(
                         height: 50.h,
+                        width: double.infinity,
                         child: DropdownButtonFormField(
                           isExpanded: true,
                           isDense: true,
-                          menuMaxHeight: 300.h, // Maximum dropdown menu height
-                          itemHeight: 50.h, // Height of each dropdown item
+                          //menuMaxHeight: 300.h, // Maximum dropdown menu height
+                          //itemHeight: 50.h, // Height of each dropdown item
+                          validator: (value){
+                            if(value==null){
+                              return "Select Category !";
+                            }
+                            return null;
+                          },
                           borderRadius: BorderRadius.circular(20.r),
                           dropdownColor: Theme.of(context).cardColor,
                           decoration: InputDecoration(
@@ -87,7 +96,6 @@ class AddNewItemScreen extends StatelessWidget{
                               color: Colors.grey,
                               fontWeight: FontWeight.w500,
                             ),textAlign: TextAlign.start,),
-
                             filled: true,
                             fillColor: Theme.of(context).focusColor,
                             enabledBorder: OutlineInputBorder(
@@ -100,6 +108,21 @@ class AddNewItemScreen extends StatelessWidget{
                                 color: Color(0xff00D100),
                                 width: 1.5,
                               ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(
+                                color: Color(0xff00D100),
+                                width: 1,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(
+                                  color: Colors.grey,
+                                  width: 0.2
+                              ),
+
                             ),
                           ),
                           icon: Icon(
@@ -150,7 +173,7 @@ class AddNewItemScreen extends StatelessWidget{
                     //Quantity & unitForm Field
                     Padding(
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 5),
-                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. 2 pcs, 2 Kg",)),
+                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. 2 pcs, 2 Kg",errormessage: "Enter Quantity of Item",)),
 
                     SizedBox(height: 15.h,),
 
@@ -212,11 +235,13 @@ class AddNewItemScreen extends StatelessWidget{
                 SizedBox(height: 25.h,),
                  // save Item Button
                 Greenbutton(ButtonHeight: 50.h, ButtonWidth: 340.w, title: "Save Item", textsize: 18.sp, onTap: (){
-               ScaffoldMessenger.of(context).clearSnackBars();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SuccessSnackBar.show("Item added successfully!"),
-                );
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Dashboardscreen()));
+                 if(_addNewItemformkey.currentState!.validate()){
+                   ScaffoldMessenger.of(context).clearSnackBars();
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     SuccessSnackBar.show("Item added successfully!"),
+                   );
+                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Dashboardscreen()));
+                 }
                 })
               ],
             ),

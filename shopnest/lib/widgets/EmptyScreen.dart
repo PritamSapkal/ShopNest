@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shopnest/screens/Add_New_item_screen.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
 
 class Emptyscreen extends StatelessWidget{
@@ -17,8 +18,8 @@ class Emptyscreen extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 200,
-                width: 200,
+                height: 200.h,
+                width: 200.w,
                 decoration: BoxDecoration(
                   boxShadow: [BoxShadow(
                     color: Colors.green.withOpacity(0.1),
@@ -35,7 +36,9 @@ class Emptyscreen extends StatelessWidget{
               Text("No Shopping Items Yet",style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 20.sp),textAlign: TextAlign.center,),
               Text("Start building your shopping list by adding your first item.",style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 13.sp),textAlign: TextAlign.center,),
               SizedBox(height: 30.h,),
-              Greenbutton(ButtonHeight: 50.h, ButtonWidth: 200.w, title: "+ Add First Item", textsize: 15.sp, onTap: (){})
+              Greenbutton(ButtonHeight: 50.h, ButtonWidth: 200.w, title: "+ Add First Item", textsize: 15.sp, onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewItemScreen(appbarTitle: "Add Your First Item")));
+              })
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopnest/screens/Add_New_item_screen.dart';
 
 import '../DataModel/ItemModel.dart';
 import '../screens/ItemDetailPage.dart';
@@ -9,9 +10,6 @@ class Itemcard extends StatelessWidget {
   Itemcard({required this._currentitemm, super.key});
 
   final Itemmodel _currentitemm;
-  late final String _unit = _currentitemm.category.name == "Dairy"
-      ? " L"
-      : " pcs";
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +65,7 @@ class Itemcard extends StatelessWidget {
                       ).textTheme.titleMedium!.copyWith(fontSize: 16),
                     ),
                     Text(
-                      "${_currentitemm.category.name} . ${_currentitemm.quantity}" +
-                          "${_unit}",
+                      "${_currentitemm.category.name} . ${_currentitemm.quantity}",
                       style: GoogleFonts.poppins(
                         color: Colors.grey,
                         fontSize: 10.sp,
@@ -114,7 +111,7 @@ class Itemcard extends StatelessWidget {
                         InkWell(
 
                           onTap: (){
-                            print('Edit Button Clicked');
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewItemScreen(appbarTitle: "Edit Item",),));
                           },
                           borderRadius: BorderRadius.circular(10.sp),
                           child: Container(

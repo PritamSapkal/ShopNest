@@ -15,7 +15,7 @@ import '../widgets/TextFormFieldWidget.dart';
 class SignInpage extends ConsumerWidget {
   SignInpage({super.key});
 
-  final _formstate = GlobalKey<FormState>();
+  final _signinformstate = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -107,7 +107,7 @@ class SignInpage extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Form(
-                        key: _formstate,
+                        key: _signinformstate,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -123,6 +123,7 @@ class SignInpage extends ConsumerWidget {
                               child: Textformfieldwidget(
                                 isObscure: false,
                                 prefixicon: Icon(Icons.mail_outline_sharp),
+                                errormessage: "Enter Correct Email Address",
                               ),
                             ),
                             //Password label
@@ -144,25 +145,29 @@ class SignInpage extends ConsumerWidget {
                                     ref.read(ObscureProvider.notifier).update((state)=>true);
                                   }
                                 }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),),
+                                errormessage: "Enter Password Correctly!",
                               ),
                             ),
                             // Forgot Password Text Button
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Textbuttongreen(OnTap: (){},textsize: 15.sp,text: "Forgot Password?",),
+                                Textbuttongreen(OnTap: (){},textsize: 14.sp,text: "Forgot Password?",),
                               ],
                             ),
                             SizedBox(height: 10.h,),
+
                             //Sign in Button
                             Center(
                               child: Greenbutton(onTap: (){
+
+                                if(_signinformstate.currentState!.validate()){
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (_) => Dashboardscreen(),
                                   ),
-                                );
+                                );}
                               },ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
                             ),
                             // devider with or continuew with option

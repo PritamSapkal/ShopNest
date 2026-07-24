@@ -4,13 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../Provider/Providers.dart';
 import '../widgets/GreenButton.dart';
+import '../widgets/SuccessSnackBar.dart';
 import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 import 'SignInPage.dart';
 
 class SignUppage extends ConsumerWidget{
-  final _formstate = GlobalKey<FormState>();
+  final _Signupformstate = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     var _isObscure=ref.watch(SignUpPageObscureProvider);
@@ -100,7 +101,7 @@ class SignUppage extends ConsumerWidget{
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Form(
-                        key: _formstate,
+                        key: _Signupformstate,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -116,6 +117,7 @@ class SignUppage extends ConsumerWidget{
                               child: Textformfieldwidget(
                                 isObscure: false,
                                 prefixicon: Icon(Icons.person),
+                                errormessage: "Please enter your good name !",
                               ),
                             ),
 
@@ -130,6 +132,7 @@ class SignUppage extends ConsumerWidget{
                               child: Textformfieldwidget(
                                 isObscure: false,
                                 prefixicon: Icon(Icons.mail_outline_sharp),
+                                errormessage:  "Please enter correct e-mail address !",
                               ),
                             ),
 
@@ -145,9 +148,13 @@ class SignUppage extends ConsumerWidget{
                                 isObscure: _isObscure,
                                 prefixicon: Icon(Icons.security),
                                 suffixicon: IconButton(onPressed: (){
-                                  if(_isObscure)ref.read(SignUpPageObscureProvider.notifier).update((state)=>false);
-                                  else ref.read(SignUpPageObscureProvider.notifier).update((state)=>true);
+                                  if(_isObscure) {
+                                    ref.read(SignUpPageObscureProvider.notifier).update((state)=>false);
+                                  } else {
+                                    ref.read(SignUpPageObscureProvider.notifier).update((state)=>true);
+                                  }
                                 }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,)),
+                                errormessage: "Please enter your password !",
                               ),
                             ),
 
@@ -162,6 +169,7 @@ class SignUppage extends ConsumerWidget{
                               child: Textformfieldwidget(
                                 isObscure: _isObscure,
                                 prefixicon: Icon(Icons.security),
+                                errormessage: "Password & confirm password not match !",
                               ),
                             ),
 
@@ -169,12 +177,16 @@ class SignUppage extends ConsumerWidget{
                             //Sign up Button
                             Center(
                               child: Greenbutton(ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Create Account", textsize: 17.sp,onTap: (){
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => SignInpage(),
-                                  ),
-                                );
+
+                                 if(_Signupformstate.currentState!.validate()){
+                                   ScaffoldMessenger.of(context).showSnackBar(
+                                     SuccessSnackBar.show("Account Created Successfully !"),
+                                   );
+                                   Navigator.pushReplacement(context, MaterialPageRoute(
+                                     builder: (_) => SignInpage(),
+                                   ),);
+                                 }
+
                               },),
                             ),
                             SizedBox(height: 20.h,)

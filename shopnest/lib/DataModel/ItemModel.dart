@@ -14,7 +14,7 @@ class Itemmodel {
 
   final String name;
   final CategoryUiProps category;
-  final int quantity;
+  final dynamic quantity;
   final String notes;
   final bool status;
   final TimeOfDay addedTime;

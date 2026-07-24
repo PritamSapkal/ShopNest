@@ -37,7 +37,7 @@ class Intorscreen extends ConsumerWidget {
               right: 20.w,
               top: 70.h,
               child: TextButton(onPressed: (){
-               _pageController.animateToPage(3, duration: Duration(milliseconds: 500), curve: Curves.linear);
+               _pageController.animateToPage(3, duration: Duration(milliseconds:1000), curve: Curves.linear);
               }, child: Text("Skip",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 15.sp),))),
           // Smooth Page Indicator
           Positioned(

@@ -4,21 +4,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Textformfieldwidget extends StatelessWidget{
-   Textformfieldwidget({this.hinttext,this.suffixicon, this.prefixicon, required this.isObscure,super.key});
+   Textformfieldwidget({this.errormessage,this.hinttext,this.suffixicon, this.prefixicon, required this.isObscure,super.key});
   final IconButton ? suffixicon;
   final bool isObscure;
   final Icon ? prefixicon;
   final String ? hinttext;
-
+  final String? errormessage;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 15.sp,fontWeight: FontWeight.normal,),
+      initialValue: "testing value",
+      style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 13.sp,fontWeight: FontWeight.normal,wordSpacing: 2),
       obscureText: isObscure,
       obscuringCharacter: "*",
       //maxLines:10,
-      validator: (value){},
+      validator: (value){
+        if(value==null||value.trim().length==0) {
+          return errormessage;
+        }
+        return null;
+      },
       onSaved: (value){},
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
@@ -44,6 +50,21 @@ class Textformfieldwidget extends StatelessWidget{
             color: Color(0xff00D100),
             width: 1,
           ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Color(0xff00D100),
+            width: 1,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+              color: Colors.grey,
+              width: 0.2
+          ),
+
         ),
       ),
     );

@@ -23,7 +23,7 @@ class SuccessSnackBar {
         ],
       ),
       backgroundColor: Color(0xff1F2937),
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
