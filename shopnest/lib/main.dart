@@ -22,7 +22,7 @@ class MyApp extends ConsumerWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
+          debugShowCheckedModeBanner: false ,
 
           // Light Theme
           theme: ThemeData.light().copyWith(
