@@ -90,7 +90,12 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
             ref.read(bottomAppbarindexProvider.notifier).update((state)=>index);
           },
           children: [
-            ref.watch(AllItemListProvider).isEmpty?Emptyscreen() :Homescreen(),
+            Consumer(
+              builder: (context, ref, child) {
+                final isEmpty = ref.watch(AllItemListProvider).isEmpty;
+                return isEmpty ?  Emptyscreen() :  Homescreen();
+              },
+            ),
             Categoriesscreen(),
             Setteingscreen(),
         ],

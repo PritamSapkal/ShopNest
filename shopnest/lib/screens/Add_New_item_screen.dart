@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopnest/DataModel/ItemModel.dart';
+import 'package:shopnest/Provider/MasterItemList.dart';
 import 'package:shopnest/screens/DashBoardScreen.dart';
 import 'package:shopnest/widgets/CustomeBackgroundContainer.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
+import '../DataModel/CategoryUiProps.dart';
 import '../data/ItemCategory.dart';
 import '../widgets/SuccessSnackBar.dart';
 import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 
-class AddNewItemScreen extends StatelessWidget{
+class AddNewItemScreen extends ConsumerWidget{
   AddNewItemScreen({required this.appbarTitle,super.key});
   final String appbarTitle;
   final  _addNewItemformkey=GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
 
+  @override
+  Widget build(BuildContext context,WidgetRef ref) {
+    return Scaffold(
       // Add shopping item Appbar
       appBar: AppBar(
         leading: IconButton(
@@ -159,7 +163,7 @@ class AddNewItemScreen extends StatelessWidget{
                           }).toList(),
                           // Function  after selecting the value
                           onChanged: (value) {
-                            // _category = value!;
+                           // CategoryUiProps  ? _category =value ;
                           },
                         ),
                       ),
@@ -236,6 +240,7 @@ class AddNewItemScreen extends StatelessWidget{
                  // save Item Button
                 Greenbutton(ButtonHeight: 50.h, ButtonWidth: 340.w, title: "Save Item", textsize: 18.sp, onTap: (){
                  if(_addNewItemformkey.currentState!.validate()){
+                  //ref.read(masteritemlistProvider.notifier).addItem(Itemmodel(name: "milk", category: categoryDetails[ItemCategory.fruits], quantity: "1 L", notes: "Fresh", status: false, addedTime: TimeOfDay.now()));
                    ScaffoldMessenger.of(context).clearSnackBars();
                    ScaffoldMessenger.of(context).showSnackBar(
                      SuccessSnackBar.show("Item added successfully!"),

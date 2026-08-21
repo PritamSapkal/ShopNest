@@ -5,9 +5,7 @@ import '../DataModel/ItemModel.dart';
 import 'ItemCategory.dart';
 
 final List<Itemmodel> dummyShoppingList = [
-
-];
-/*  Itemmodel(
+  Itemmodel(
     name: 'Organic Broccoli',
     category: categoryDetails[ItemCategory.vegetables]!,
     quantity: "2 pcs",
@@ -101,4 +99,7 @@ final List<Itemmodel> dummyShoppingList = [
     notes: 'Blueberry flavor',
     status: false,
     addedTime:TimeOfDay.now(),
-  ),*/
+  ),
+
+
+];
