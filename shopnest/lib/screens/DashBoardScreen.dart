@@ -25,8 +25,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
     Widget appbarwidget= Column(
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
-       Text(
-         'Good Morning 👋',
+       Text(getGreeting(),
          style: Theme
              .of(context)
              .textTheme
@@ -147,5 +146,19 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
           showSelectedLabels: true,
         ),
     );
+  }
+}
+// Greeting Function
+String getGreeting() {
+  final hour = DateTime.now().hour;
+
+  if (hour >= 5 && hour < 12) {
+    return "Good Morning 👋";
+  } else if (hour >= 12 && hour < 17) {
+    return "Good Afternoon 👋";
+  } else if (hour >= 17 && hour < 22) {
+    return "Good Evening 👋";
+  } else {
+    return "Welcome 👋"; // Handles 10:00 PM to 4:59 AM cleanly
   }
 }
