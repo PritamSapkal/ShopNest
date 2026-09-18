@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/SignInPage.dart';
 import '../Provider/Providers.dart';
 import '../Provider/ThemeProvider.dart';
+import '../Provider/userInfoProvider.dart';
 import '../SharedPreferencess/AppThemePref.dart';
 import '../widgets/AppearanceWidget.dart';
 import '../widgets/CustomeBackgroundContainer.dart';
@@ -14,6 +15,8 @@ class Setteingscreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeProvider);
+    String _username=ref.watch(userInfoProvider).name.toString();
+    String _email=ref.watch(userInfoProvider).email.toString();
     return Scaffold(
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
@@ -23,6 +26,7 @@ class Setteingscreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               // Name & Email Address Container // ShopenestIcon cart Container
               Customebackgroundcontainer(
                 childwidget: Padding(
@@ -82,13 +86,13 @@ class Setteingscreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Pritam Sapkal",
+                              _username,
                               style: Theme.of(context).textTheme.titleMedium!
                                   .copyWith(fontSize: 15.sp),
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              "pritam.s0752@gmail.com",
+                              _email,
                               style: GoogleFonts.poppins(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w600,
@@ -103,6 +107,7 @@ class Setteingscreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 10.h),
+
               // Appearance Text
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -119,6 +124,7 @@ class Setteingscreen extends ConsumerWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
+
               // Theme Options
               Customebackgroundcontainer(
                 childwidget: Column(
@@ -172,6 +178,7 @@ class Setteingscreen extends ConsumerWidget {
                   ],
                 ),
               ),
+
               // About Text
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -188,6 +195,7 @@ class Setteingscreen extends ConsumerWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
+
               // App Version Showing Container.
               Customebackgroundcontainer(
                 childwidget: Padding(
@@ -226,11 +234,25 @@ class Setteingscreen extends ConsumerWidget {
                 ),
               ),
                SizedBox(height: 20.h,),
+
               //Logout Button
               InkWell(
-                onTap: (){
-                  ref.read(bottomAppbarindexProvider.notifier).update((state)=>0);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInpage()));
+                onTap: () async {
+                  // Reset bottom navigation index
+                  ref.read(bottomAppbarindexProvider.notifier).update((state) => 0);
+
+                  // Clear SharedPreferences and provider state
+                  await ref.read(userInfoProvider.notifier).clearUser();
+
+                  // Ensure widget is still mounted after the async gap
+                  if (!context.mounted) return;
+
+                  // Clear navigation stack and send user back to the login screen
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  SignInpage()),
+                        (route) => false,
+                  );
                 },
                 child: Container(
                   width: double.infinity,
