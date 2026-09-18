@@ -8,6 +8,7 @@ import 'package:shopnest/screens/DashBoardScreen.dart';
 import 'package:shopnest/screens/SignUpPage.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
 
+import '../Provider/userInfoProvider.dart';
 import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
@@ -185,14 +186,22 @@ class SignInpage extends ConsumerWidget {
                             //Enter Shopnest Button
                             Center(
                               child: Greenbutton(
-                                onTap: () {
+                                onTap: () async {
                                   if (_signinformstate.currentState!.validate()) {
-                                     Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => Dashboardscreen(),
-                                  ),
-                                );
+                                    final isUserAdded = await ref.read(userInfoProvider.notifier).addUser(
+                                      _namecontroller.text.trim(),
+                                      _emailcontroller.text.trim(),
+                                    );
+
+                                    // Guard against using context across the async gap
+                                    if (!context.mounted) return;
+
+                                    if (isUserAdded) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const Dashboardscreen()),
+                                      );
+                                    }
                                   }
                                 },
                                 ButtonHeight: 45.h,

@@ -2,25 +2,49 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopnest/screens/DashBoardScreen.dart';
 
+import '../Provider/userInfoProvider.dart';
 import 'IntorScreen.dart';
 
 
-class Splashscreen extends StatefulWidget {
+class Splashscreen extends ConsumerStatefulWidget {
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  ConsumerState<Splashscreen> createState() => _SplashscreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class _SplashscreenState extends ConsumerState<Splashscreen> {
+  @override
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Intorscreen() ));
+    _checkAuthAndNavigate();
+  }
+
+  void _checkAuthAndNavigate() {
+    Timer(const Duration(seconds: 3), () {
+      // Prevent navigating if the widget is already disposed
+      if (!mounted) return;
+
+      // Use ref.read instead of ref.watch in callbacks/initState
+      final user = ref.read(userInfoProvider);
+
+      if (user.name != null && user.email != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Dashboardscreen()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) =>  Intorscreen()),
+        );
+      }
     });
   }
   @override
