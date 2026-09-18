@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/HomeScreen.dart';
 
 import '../Provider/Providers.dart';
+import '../Provider/userInfoProvider.dart';
 import '../widgets/EmptyScreen.dart';
 import 'CategoriesScreen.dart';
 import 'SetteingScreen.dart';
@@ -22,6 +23,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
   @override
   Widget build(BuildContext context) {
     var _selectedIndex=ref.watch(bottomAppbarindexProvider);// Bottom App Bar Index
+    String _Username=ref.watch(userInfoProvider).name.toString();
     Widget appbarwidget= Column(
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
@@ -36,7 +38,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
          ),
        ),
        Text(
-         "Pritam Sapkal",
+         _Username,
          style: Theme
              .of(
            context,
