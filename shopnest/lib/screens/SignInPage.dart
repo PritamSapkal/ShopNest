@@ -17,9 +17,13 @@ class SignInpage extends ConsumerWidget {
 
   final _signinformstate = GlobalKey<FormState>();
 
+  // name & email Controller
+  final TextEditingController _namecontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    bool _isObscure=ref.watch(ObscureProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool _isObscure = ref.watch(ObscureProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
@@ -40,18 +44,27 @@ class SignInpage extends ConsumerWidget {
                     height: 80.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                        // 1. This adds the glowing effect behind the button
-                        boxShadow: [
-                    BoxShadow(
-                    color: const Color(0xFF2ECC71).withOpacity(0.4), // Match your gradient color with opacity
-                    blurRadius: 20, // High blur gives that soft "lighting" effect
-                    spreadRadius: 4, // How far the glow extends
-                    offset: const Offset(0, 5), // Moves the glow slightly downwards
-                  ),
-                    ],
+                      // 1. This adds the glowing effect behind the button
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF2ECC71).withOpacity(0.4),
+                          // Match your gradient color with opacity
+                          blurRadius: 20,
+                          // High blur gives that soft "lighting" effect
+                          spreadRadius: 4,
+                          // How far the glow extends
+                          offset: const Offset(
+                            0,
+                            5,
+                          ), // Moves the glow slightly downwards
+                        ),
+                      ],
                       gradient: LinearGradient(
-                        colors: [ Color(0xFF59C76E), // Brighter green on the left
-                          Color(0xFF4CB493)],
+                        colors: [
+                          Color(0xFF59C76E),
+                          // Brighter green on the left
+                          Color(0xFF4CB493),
+                        ],
                         begin: AlignmentGeometry.topLeft,
                         end: AlignmentGeometry.bottomRight,
                       ),
@@ -69,7 +82,7 @@ class SignInpage extends ConsumerWidget {
                 SizedBox(height: 10.h),
                 // welcome back text
                 Text(
-                  "Welcome Back",
+                  "Welcome to Shopnest",
                   style: Theme.of(
                     context,
                   ).textTheme.titleMedium!.copyWith(fontSize: 25.sp),
@@ -78,14 +91,14 @@ class SignInpage extends ConsumerWidget {
                 SizedBox(height: 5.h),
                 // sign inm your shopnest account text
                 Text(
-                  "Sign in to your ShopNest account",
+                  "Enter your details to create and manage your offline shopping lists effortlessly",
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     fontSize: 13.sp,
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w100,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: 25.h),
 
                 //Form Container
                 Padding(
@@ -112,65 +125,85 @@ class SignInpage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            //Email label
+                            //full name label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Email Address",fontsize: 15,),
+                              child: Textfieldlabel(
+                                label: "FULL NAME",
+                                fontsize: 11.sp,
+                              ),
                             ),
-                            //EMAIL Textfield
+                            // full name  Textfield
                             Padding(
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                               child: Textformfieldwidget(
                                 isObscure: false,
-                                prefixicon: Icon(Icons.mail_outline_sharp),
-                                errormessage: "Enter Correct Email Address",
+                                controller: _namecontroller,
+                                prefixicon: Icon(Icons.person_2_outlined),
+                                hinttext: 'e.g. Samarth Patel',
+                                errormessage: "Please Enter your name!",
                               ),
                             ),
-                            //Password label
+                            SizedBox(height: 5.h),
+                            // email label
                             Padding(
                               padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Textfieldlabel(label: "Password",fontsize: 15,),
+                              child: Textfieldlabel(
+                                label: "EMAIL ADDRESS",
+                                fontsize: 11.sp,
+                              ),
                             ),
-                            //Password Textfield
+                            //Email Textfield
                             Padding(
                               padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                               child: Textformfieldwidget(
-                                isObscure: _isObscure,
-                                prefixicon: Icon(Icons.lock_open_sharp),
-                                suffixicon: IconButton(onPressed: (){
+                                controller: _emailcontroller,
+                                isObscure: false,
+                                prefixicon: Icon(Icons.mail_outline),
+                                hinttext: "name@example.com",
+                                /*suffixicon: IconButton(onPressed: (){
                                   if(_isObscure){
                                     ref.read(ObscureProvider.notifier).update((state)=>false);
                                   }
                                   else{
                                     ref.read(ObscureProvider.notifier).update((state)=>true);
                                   }
-                                }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),),
-                                errormessage: "Enter Password Correctly!",
+                                }, icon: _isObscure?Icon(Icons.visibility_off_sharp,color: Colors.green,):Icon(Icons.visibility_sharp,color: Colors.green,),),*/
+                                errormessage: "Enter Email Correctly!",
                               ),
                             ),
+
                             // Forgot Password Text Button
-                            Row(
+                            /* Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Textbuttongreen(OnTap: (){},textsize: 14.sp,text: "Forgot Password?",),
                               ],
-                            ),
-                            SizedBox(height: 10.h,),
+                            ),*/
+                            SizedBox(height: 15.h),
 
-                            //Sign in Button
+                            //Enter Shopnest Button
                             Center(
-                              child: Greenbutton(onTap: (){
-
-                                if(_signinformstate.currentState!.validate()){
-                                Navigator.pushReplacement(
+                              child: Greenbutton(
+                                onTap: () {
+                                  if (_signinformstate.currentState!.validate()) {
+                                     Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (_) => Dashboardscreen(),
                                   ),
-                                );}
-                              },ButtonHeight: 50.h, ButtonWidth: 310.w, title: "Sign In", textsize:  18.sp),
+                                );
+                                  }
+                                },
+                                ButtonHeight: 45.h,
+                                ButtonWidth: 310.w,
+                                title: "Enter Shopnest >",
+                                textsize: 18.sp,
+                              ),
                             ),
-                            // devider with or continuew with option
+
+                            SizedBox(height: 15.h),
+                            /* // devider with or continuew with option
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
                               child: Row(
@@ -225,7 +258,7 @@ class SignInpage extends ConsumerWidget {
                                 ),
                               )),
                             ),
-                            SizedBox(height: 10.h,),
+                            SizedBox(height: 10.h,),*/
                           ],
                         ),
                       ),
@@ -233,17 +266,19 @@ class SignInpage extends ConsumerWidget {
                   ),
                 ),
 
-                SizedBox(height: 10.h,),
+                SizedBox(height: 30.h),
+
                 //Don't have an account? Create Account (TextButton)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text("Don't have an account?",style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 13.sp,fontWeight: FontWeight.w300),),
-                    Textbuttongreen(text: "Create Account",textsize: 15.sp,OnTap: (){
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>SignUppage()));
-                    },),
+                    Icon(Icons.security, color: Color(0xff46D079)),
+                    Text(' Your offline shopping list partner . Fast & secure',style: GoogleFonts.poppins(color: Colors.grey),),
                   ],
-                )
+                ),
+                SizedBox(height: 10.h),
+
               ],
             ),
           ),

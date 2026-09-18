@@ -4,17 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Textformfieldwidget extends StatelessWidget{
-   Textformfieldwidget({this.errormessage,this.hinttext,this.suffixicon, this.prefixicon, required this.isObscure,super.key});
+   Textformfieldwidget({this.controller,this.errormessage,this.hinttext,this.suffixicon, this.prefixicon, required this.isObscure,super.key});
   final IconButton ? suffixicon;
   final bool isObscure;
   final Icon ? prefixicon;
   final String ? hinttext;
   final String? errormessage;
+  TextEditingController ? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: "testing value",
+      controller: controller,
       style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 13.sp,fontWeight: FontWeight.normal,wordSpacing: 2),
       obscureText: isObscure,
       obscuringCharacter: "*",
