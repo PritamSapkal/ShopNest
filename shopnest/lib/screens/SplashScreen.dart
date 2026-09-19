@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,14 +56,6 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // Your splash UI here
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,3 +131,4 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
       ),
     );
   }
+}
