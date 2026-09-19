@@ -12,87 +12,151 @@ import '../widgets/AppearanceWidget.dart';
 import '../widgets/CustomeBackgroundContainer.dart';
 
 class Setteingscreen extends ConsumerWidget {
+  const Setteingscreen({super.key});
+
+  // Method to show theme-adaptive warning dialog
+  Future<bool?> _showLogoutConfirmationDialog(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: theme.dialogBackgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.redAccent,
+            size: 38.sp,
+          ),
+          title: Text(
+            "Log Out Confirmation",
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
+            "If you log out, all of your shopping cart and saved data will be permanently deleted. Do you want to continue?",
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontSize: 13.sp,
+              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          actions: [
+            // Cancel Button
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(
+                "Cancel",
+                style: GoogleFonts.poppins(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600,
+                  color: theme.textTheme.bodyMedium?.color,
+                ),
+              ),
+            ),
+            // Confirm / Delete Data Button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              ),
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(
+                "Log Out",
+                style: GoogleFonts.poppins(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeProvider);
-    String _username=ref.watch(userInfoProvider).name.toString();
-    String _email=ref.watch(userInfoProvider).email.toString();
+    final username = ref.watch(userInfoProvider).name.toString();
+    final email = ref.watch(userInfoProvider).email.toString();
+
     return Scaffold(
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              // Name & Email Address Container // ShopenestIcon cart Container
+              // Name & Email Address Container
               Customebackgroundcontainer(
                 childwidget: Padding(
-                  padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 20.h,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // Icon
                       Container(
                         width: 40.w,
                         height: 40.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          // 1. This adds the glowing effect behind the button
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF2ECC71).withOpacity(
-                                0.4,
-                              ), // Match your gradient color with opacity
-                              blurRadius:
-                                  10, // High blur gives that soft "lighting" effect
-                              spreadRadius: 1, // How far the glow extends
-                              offset: const Offset(
-                                0,
-                                2,
-                              ), // Moves the glow slightly downwards
+                              color: const Color(0xFF2ECC71).withOpacity(0.4),
+                              blurRadius: 10,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 2),
                             ),
                           ],
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
-                              Color(0xFF59C76E), // Brighter green on the left
+                              Color(0xFF59C76E),
                               Color(0xFF4CB493),
                             ],
-                            begin: AlignmentGeometry.topLeft,
-                            end: AlignmentGeometry.bottomRight,
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
                         ),
                         child: Center(
                           child: FaIcon(
                             FontAwesomeIcons.cartArrowDown,
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
                             size: 20.sp,
                           ),
                         ),
                       ),
-                      //for gap
                       SizedBox(width: 10.w),
-                      // Name & email address.
                       Padding(
-                        padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              _username,
+                              username,
                               style: Theme.of(context).textTheme.titleMedium!
                                   .copyWith(fontSize: 15.sp),
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              _email,
+                              email,
                               style: GoogleFonts.poppins(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w600,
@@ -108,11 +172,11 @@ class Setteingscreen extends ConsumerWidget {
               ),
               SizedBox(height: 10.h),
 
-              // Appearance Text
+              // Appearance Section
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 10.h,
                 ),
                 child: Text(
                   "Appearance",
@@ -129,46 +193,38 @@ class Setteingscreen extends ConsumerWidget {
               Customebackgroundcontainer(
                 childwidget: Column(
                   children: [
-                    // Light Mode
                     AppearanceWidget(
                       icon: const Icon(
                         Icons.wb_sunny_outlined,
                         color: Colors.orangeAccent,
                       ),
                       settingName: "Light Theme",
-
                       isSelected: currentTheme == AppTheme.light,
-
                       onTap: () {
                         ref
                             .read(themeProvider.notifier)
                             .changeTheme(AppTheme.light);
                       },
                     ),
-                    Divider(),
-                    // Dark Mode
+                    const Divider(),
                     AppearanceWidget(
                       icon: const Icon(
                         Icons.dark_mode_outlined,
                         color: Colors.blueAccent,
                       ),
                       settingName: "Dark Theme",
-
                       isSelected: currentTheme == AppTheme.dark,
-
                       onTap: () {
                         ref
                             .read(themeProvider.notifier)
                             .changeTheme(AppTheme.dark);
                       },
                     ),
-                    Divider(),
-                    //System Default Mode
+                    const Divider(),
                     AppearanceWidget(
                       icon: const Icon(Icons.phone_android, color: Colors.grey),
                       settingName: "System Theme",
                       isSelected: currentTheme == AppTheme.system,
-
                       onTap: () {
                         ref
                             .read(themeProvider.notifier)
@@ -179,11 +235,11 @@ class Setteingscreen extends ConsumerWidget {
                 ),
               ),
 
-              // About Text
+              // About Section
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 10.h,
                 ),
                 child: Text(
                   "About",
@@ -196,61 +252,73 @@ class Setteingscreen extends ConsumerWidget {
                 ),
               ),
 
-              // App Version Showing Container.
+              // App Version
               Customebackgroundcontainer(
                 childwidget: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 20.h,
                   ),
                   child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Icon(
                           Icons.info_outline,
                           color: Colors.lightGreenAccent,
                         ),
                       ),
-
                       Text(
-                        "Vesrion",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium!.copyWith(fontSize: 14.sp),
+                        "Version",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontSize: 14.sp),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Padding(
-                        padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
                           "1.0.0",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleMedium!.copyWith(fontSize: 13.sp),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontSize: 13.sp),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-               SizedBox(height: 20.h,),
+              SizedBox(height: 20.h),
 
-              //Logout Button
+              // Logout Button
               InkWell(
                 onTap: () async {
+                  // Show the warning dialog first
+                  final shouldLogout =
+                  await _showLogoutConfirmationDialog(context);
+
+                  // If user dismissed or clicked Cancel, abort
+                  if (shouldLogout != true) return;
+
                   // Reset bottom navigation index
-                  ref.read(bottomAppbarindexProvider.notifier).update((state) => 0);
+                  ref
+                      .read(bottomAppbarindexProvider.notifier)
+                      .update((state) => 0);
 
                   // Clear SharedPreferences and provider state
                   await ref.read(userInfoProvider.notifier).clearUser();
 
-                  // Ensure widget is still mounted after the async gap
+                  // Check if the widget is still mounted after async operations
                   if (!context.mounted) return;
 
-                  // Clear navigation stack and send user back to the login screen
+                  // Clear navigation stack and return to login
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) =>  SignInpage()),
+                    MaterialPageRoute(
+                      builder: (context) =>  SignInpage(),
+                    ),
                         (route) => false,
                   );
                 },
@@ -259,15 +327,22 @@ class Setteingscreen extends ConsumerWidget {
                   height: 50.h,
                   decoration: BoxDecoration(
                     color: Colors.red.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20)
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.logout,color: Colors.redAccent,),
-                        SizedBox(width: 10.w,),
-                        Text("Log Out",style: GoogleFonts.poppins(color: Colors.redAccent,fontSize: 13.sp,fontWeight: FontWeight.bold),)
+                        const Icon(Icons.logout, color: Colors.redAccent),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Log Out",
+                          style: GoogleFonts.poppins(
+                            color: Colors.redAccent,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                   ),
