@@ -19,34 +19,52 @@ class Splashscreen extends ConsumerStatefulWidget {
 }
 
 class _SplashscreenState extends ConsumerState<Splashscreen> {
-  @override
+
   @override
   void initState() {
     super.initState();
     _checkAuthAndNavigate();
   }
 
-  void _checkAuthAndNavigate() {
-    Timer(const Duration(seconds: 3), () {
-      // Prevent navigating if the widget is already disposed
-      if (!mounted) return;
+  Future<void> _checkAuthAndNavigate() async {
+    // 1. Explicitly wait for both the 3-second timer and the storage read
+    await Future.wait([
+      Future.delayed(const Duration(seconds: 3)),
+      ref.read(userInfoProvider.notifier).loadUser(),
+    ]);
 
-      // Use ref.read instead of ref.watch in callbacks/initState
-      final user = ref.read(userInfoProvider);
+    if (!mounted) return;
 
-      if (user.name != null && user.email != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Dashboardscreen()),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) =>  Intorscreen()),
-        );
-      }
-    });
+    // 2. Read the guaranteed loaded state
+    final user = ref.read(userInfoProvider);
+
+    // Debug check: open your debug console to verify what was fetched
+    // print('Loaded user -> Name: ${user.name}, Email: ${user.email}');
+
+    if (user.name != null &&
+        user.email != null &&
+        user.name!.isNotEmpty &&
+        user.email!.isNotEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Dashboardscreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) =>  Intorscreen()),
+      );
+    }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    // Your splash UI here
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,4 +140,3 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
       ),
     );
   }
-}
