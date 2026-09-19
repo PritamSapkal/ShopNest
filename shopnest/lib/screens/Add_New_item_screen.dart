@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shopnest/DataModel/ItemModel.dart';
-import 'package:shopnest/Provider/MasterItemList.dart';
 import 'package:shopnest/screens/DashBoardScreen.dart';
 import 'package:shopnest/widgets/CustomeBackgroundContainer.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
 import '../DataModel/CategoryUiProps.dart';
+import '../DataModel/ItemModel.dart';
+import '../Provider/MasterItemList.dart';
 import '../data/ItemCategory.dart';
 import '../widgets/SuccessSnackBar.dart';
-import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 
@@ -18,6 +17,11 @@ class AddNewItemScreen extends ConsumerWidget{
   AddNewItemScreen({required this.appbarTitle,super.key});
   final String appbarTitle;
   final  _addNewItemformkey=GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _notesController = TextEditingController();
+  CategoryUiProps? _selectedCategory;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -66,13 +70,14 @@ class AddNewItemScreen extends ConsumerWidget{
                     // Item name Form Field
                     Padding(
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 5),
-                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. Organic Spinach",errormessage: "Enter Item name ",)),
+                        child: Textformfieldwidget(controller: _nameController,isObscure: false,hinttext: "       e.g. Organic Spinach",errormessage: "Enter Item name ",)),
 
                     // Category Text Label
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                       child: Textfieldlabel(label: "Category *",fontsize:  11.sp,),
                     ),
+
                     // Category Drop Down Menu button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -86,6 +91,9 @@ class AddNewItemScreen extends ConsumerWidget{
                           isDense: true,
                           //menuMaxHeight: 300.h, // Maximum dropdown menu height
                           //itemHeight: 50.h, // Height of each dropdown item
+                          onChanged: (value) {
+                            _selectedCategory=value;
+                          },
                           validator: (value){
                             if(value==null){
                               return "Select Category !";
@@ -95,7 +103,7 @@ class AddNewItemScreen extends ConsumerWidget{
                           borderRadius: BorderRadius.circular(20.r),
                           dropdownColor: Theme.of(context).cardColor,
                           decoration: InputDecoration(
-                            hint: Text('Select Category',style: GoogleFonts.poppins(
+                            hint: Text('  Select Category',style: GoogleFonts.poppins(
                               fontSize: 13.sp,
                               color: Colors.grey,
                               fontWeight: FontWeight.w500,
@@ -134,7 +142,7 @@ class AddNewItemScreen extends ConsumerWidget{
                             size: 28.sp,
                           ),
                           // Category list showing code
-                          items: categoryDetails.entries.map((item) {
+                          items: categoryDetails.entries.skip(1).map((item) {
                             return DropdownMenuItem(
                               value: item.value,
                               child: Row(
@@ -162,9 +170,6 @@ class AddNewItemScreen extends ConsumerWidget{
                             );
                           }).toList(),
                           // Function  after selecting the value
-                          onChanged: (value) {
-                           // CategoryUiProps  ? _category =value ;
-                          },
                         ),
                       ),
                     ),
@@ -177,7 +182,7 @@ class AddNewItemScreen extends ConsumerWidget{
                     //Quantity & unitForm Field
                     Padding(
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 5),
-                        child: Textformfieldwidget(isObscure: false,hinttext: "       e.g. 2 pcs, 2 Kg",errormessage: "Enter Quantity of Item",)),
+                        child: Textformfieldwidget(controller: _quantityController,isObscure: false,hinttext: "       e.g. 2 pcs, 2 Kg",errormessage: "Enter Quantity of Item",)),
 
                     SizedBox(height: 15.h,),
 
@@ -202,6 +207,7 @@ class AddNewItemScreen extends ConsumerWidget{
                         child: TextFormField(
                           style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 15.sp,fontWeight: FontWeight.normal,),
                           maxLines:4,
+                          controller: _notesController,
                           validator: (value){
                             return null;
                           },
@@ -238,16 +244,36 @@ class AddNewItemScreen extends ConsumerWidget{
 
                 SizedBox(height: 25.h,),
                  // save Item Button
-                Greenbutton(ButtonHeight: 50.h, ButtonWidth: 340.w, title: "Save Item", textsize: 18.sp, onTap: (){
-                 if(_addNewItemformkey.currentState!.validate()){
-                  //ref.read(masteritemlistProvider.notifier).addItem(Itemmodel(name: "milk", category: categoryDetails[ItemCategory.fruits], quantity: "1 L", notes: "Fresh", status: false, addedTime: TimeOfDay.now()));
-                   ScaffoldMessenger.of(context).clearSnackBars();
-                   ScaffoldMessenger.of(context).showSnackBar(
-                     SuccessSnackBar.show("Item added successfully!"),
-                   );
-                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Dashboardscreen()));
-                 }
-                })
+                Greenbutton(
+                  ButtonHeight: 50.h,
+                  ButtonWidth: 340.w,
+                  title: "Save Item",
+                  textsize: 18.sp,
+                  onTap: () {
+                    if (_addNewItemformkey.currentState!.validate()) {
+                      // 1. Build and save the model from user inputs
+                      final newItem = Itemmodel(
+                        name: _nameController.text.trim(),
+                        category: _selectedCategory!, // Ensure not null
+                        quantity: _quantityController.text.trim(),
+                        notes: _notesController.text.trim(),
+                        status: false,
+                        addedTime: TimeOfDay.now(),
+                      );
+
+                      ref.read(masteritemlistProvider.notifier).addItem(newItem);
+
+                      // 2. Show feedback
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SuccessSnackBar.show("Item added successfully!"),
+                      );
+
+                      // 3. Pop back to dashboard rather than replacing the route
+                      Navigator.pop(context);
+                    }
+                  },
+                )
               ],
             ),
           ),
