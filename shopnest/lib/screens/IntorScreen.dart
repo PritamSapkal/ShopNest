@@ -33,12 +33,13 @@ class Intorscreen extends ConsumerWidget {
             },
           ),
           //Skip TextButton
-          Positioned(
+          _currentindex<2?Positioned(
               right: 20.w,
               top: 70.h,
               child: TextButton(onPressed: (){
+                ref.read(IntroIndexProvider.notifier).update((state) => 3);
                _pageController.animateToPage(3, duration: Duration(milliseconds:500), curve: Curves.linear);
-              }, child: Text("Skip",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 12.sp),))),
+              }, child: Text("Skip",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w700,fontSize: 12.sp),))):const SizedBox.shrink(),
           // Smooth Page Indicator
           Positioned(
             bottom: 110.h,
