@@ -167,6 +167,8 @@ class ItemdetailPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Item_Information(title: "Name",information: _currentitemm.name.toString(),),
+                    Divider(),
                     Item_Information(title: "Quantity",information: _currentitemm.quantity.toString(),),
                     Divider(),
                     Item_Information(title: "Category",information: _currentitemm.category.name,),
@@ -210,9 +212,12 @@ class Item_Information extends StatelessWidget {
               ),
             ),
           ),
-         Padding(
-             padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
-             child: Text(information,style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12.sp),))
+         SizedBox(width: 10.w,),
+         Expanded(
+           child: Padding(
+               padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
+               child: Text(information,style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 12.sp),overflow:TextOverflow.ellipsis,maxLines: 5,)),
+         )
         ],
       ),
     );
