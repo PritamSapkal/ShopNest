@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/Add_New_item_screen.dart';
 
 import '../DataModel/ItemModel.dart';
+import '../Provider/MasterItemList.dart';
 import '../screens/ItemDetailPage.dart';
 
-class Itemcard extends StatelessWidget {
+class Itemcard extends ConsumerStatefulWidget {
   Itemcard({required this._currentitemm, super.key});
 
   final Itemmodel _currentitemm;
 
   @override
+  ConsumerState<Itemcard> createState() => _ItemcardState();
+}
+
+class _ItemcardState extends ConsumerState<Itemcard> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemdetailPage(currentitemm: _currentitemm,)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemdetailPage(currentitemm: widget._currentitemm,)));
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 500),
@@ -33,24 +40,24 @@ class Itemcard extends StatelessWidget {
             children: [
               //Category Icon Container.
               Hero(
-                tag: _currentitemm.id,
+                tag: widget._currentitemm.id,
                 curve: Curves.linear,
                 child: Container(
                   width: 45.w,
                   height: 45.h,
                   decoration: BoxDecoration(
-                    color: _currentitemm.category.backgroundColor,
+                    color: widget._currentitemm.category.backgroundColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
                     child: Icon(
-                      _currentitemm.category.icon,
-                      color: _currentitemm.category.baseColor,
+                      widget._currentitemm.category.icon,
+                      color: widget._currentitemm.category.baseColor,
                     ),
                   ),
                 ),
               ),
-      
+
               SizedBox(width: 10.w),
               //item Name Category Name, Notes & Quantity
               Expanded(
@@ -59,13 +66,13 @@ class Itemcard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _currentitemm.name,
+                      widget._currentitemm.name,
                       style: Theme.of(
                         context,
                       ).textTheme.titleMedium!.copyWith(fontSize: 16),
                     ),
                     Text(
-                      "${_currentitemm.category.name} . ${_currentitemm.quantity}",
+                      "${widget._currentitemm.category.name} . ${widget._currentitemm.quantity}",
                       style: GoogleFonts.poppins(
                         color: Colors.grey,
                         fontSize: 10.sp,
@@ -75,7 +82,7 @@ class Itemcard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      _currentitemm.notes,
+                      widget._currentitemm.notes,
                       style: GoogleFonts.poppins(
                         color: Colors.grey,
                         fontSize: 10.sp,
@@ -93,62 +100,73 @@ class Itemcard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // checkbox to mark the status
+                    // In Itemcard.dart
                     Checkbox(
-                      value: _currentitemm.status, // boolean value (true/false)
+                      value: widget._currentitemm.status,
+                      activeColor: Colors.green,
+                      shape: const CircleBorder(),
+                      checkColor: Colors.white,
                       onChanged: (bool? newValue) {
-                        print('status Button clicked');
+                        ref
+                            .read(masteritemlistProvider.notifier)
+                            .toggleStatus(widget._currentitemm.id);
                       },
-                      activeColor: Colors.green, // Color when checked
-                      shape: const CircleBorder(), // Forces the checkbox to be a perfect circle
-                      checkColor: Colors.green,
                     ),
-                    // delete And edit Button
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Edit Button
                         InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddNewItemScreen(
+                                  appbarTitle: "Edit Item",
+                                  existingItem: widget._currentitemm, // Pass item to edit
+                                ),
+                              ),
+                            );
+                          },
+                          borderRadius: BorderRadius.circular(10.r),
+                          child: Container(
+                            width: 25.w,
+                            height: 25.h,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: Center(
+                              child: Icon(Icons.edit, color: Colors.grey, size: 15.sp),
+                            ),
+                          ),
+                        ),
 
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewItemScreen(appbarTitle: "Edit Item",),));
-                          },
-                          borderRadius: BorderRadius.circular(10.sp),
-                          child: Container(
-                              width: 25.w,
-                              height: 25.h,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(10.r)
-                              ),
-                              child: Center(
-                                child: Icon(Icons.edit, color: Colors.grey,size: 15.sp,),
-                              ),
-                            ),
-                        ),
-      
                         SizedBox(width: 10.w),
-                        // Delete Buttton
+
+                        // Delete Button
                         InkWell(
-                          onTap: (){
-                            print('Delete Button Clicked');
+                          onTap: () {
+                            ref
+                                .read(masteritemlistProvider.notifier)
+                                .deleteItemById(widget._currentitemm.id);
                           },
-                          borderRadius: BorderRadius.circular(10.sp),
+                          borderRadius: BorderRadius.circular(10.r),
                           child: Container(
-                              width: 25.w,
-                              height: 25.h,
-                              decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10.r)
-                              ),
-                              child: Center(
-                                child: Icon(Icons.delete_outline_sharp, color: Colors.redAccent),
-                              ),
+                            width: 25.w,
+                            height: 25.h,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
+                            child: const Center(
+                              child: Icon(Icons.delete_outline_sharp, color: Colors.redAccent),
+                            ),
+                          ),
                         ),
-      
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
