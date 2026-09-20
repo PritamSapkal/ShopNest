@@ -43,6 +43,14 @@ class Filteredlistprovider extends StateNotifier<Filterlistmodel> {
       SelectedCategory:"All",
     );
   }
+
+  void setItemCategortoAll(){
+    List<Itemmodel>  masterItemsList = _ref.read(AllItemListProvider);
+    state= Filterlistmodel(
+      FilteredList: masterItemsList,
+      SelectedCategory: 'All',
+    );
+  }
 }
 var FilterListProvider=StateNotifierProvider<Filteredlistprovider,Filterlistmodel>((ref){
   return Filteredlistprovider(ref);

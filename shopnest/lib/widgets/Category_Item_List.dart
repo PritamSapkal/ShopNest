@@ -70,7 +70,9 @@ class CategoryAndItemList extends ConsumerWidget {
              SizedBox(width: 3.w,),
             Text("("+"${itemList.length}"+" items)",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w500),),
             Spacer(),
-            Textbuttongreen(text:"See All",textsize:12.sp,OnTap: (){},),
+            Textbuttongreen(text:"See All",textsize:12.sp,OnTap: (){
+              ref.read(FilterListProvider.notifier).setItemCategortoAll();
+            },),
           ],
         ),
 
