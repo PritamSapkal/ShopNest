@@ -1,3 +1,5 @@
+// lib/Provider/MasterItemList.dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shopnest/DataModel/ItemModel.dart';
 
@@ -8,29 +10,27 @@ class Masteritemlist extends StateNotifier<List<Itemmodel>> {
     state = [...state, item];
   }
 
-  // Deleting using index or unique ID avoids reference equality bugs
-  void deleteItem(int index) {
-    if (index >= 0 && index < state.length) {
-      final updatedList = List<Itemmodel>.from(state)..removeAt(index);
-      state = updatedList;
-    }
+  void deleteItemById(String id) {
+    state = state.where((item) => item.id != id).toList();
   }
 
-  void updateItem(Itemmodel item, int index) {
-    if (index >= 0 && index < state.length) {
-      state = [
-        for (int i = 0; i < state.length; i++)
-          if (i == index) item else state[i],
-      ];
-    }
+  void updateItem(Itemmodel updatedItem) {
+    state = [
+      for (final item in state)
+        if (item.id == updatedItem.id) updatedItem else item,
+    ];
   }
 
-void toggleStatus(int index) {
-         if (index >= 0 && index < state.length) {
-           final currentItem = state[index];
-         updateItem( Itemmodel( name: currentItem.name,  category: currentItem.category, quantity: currentItem.quantity,  notes: currentItem.notes,  status: !currentItem.status, addedTime: currentItem.addedTime,),
-         index,);
-}}}
+  void toggleStatus(String id) {
+    state = [
+      for (final item in state)
+        if (item.id == id)
+          item.copyWith(status: !item.status)
+        else
+          item,
+    ];
+  }
+}
 
 final masteritemlistProvider =
 StateNotifierProvider<Masteritemlist, List<Itemmodel>>((ref) {
