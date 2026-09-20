@@ -173,7 +173,7 @@ class ItemdetailPage extends StatelessWidget {
                     Divider(),
                     Item_Information(title: "Category",information: _currentitemm.category.name,),
                     Divider(),
-                    Item_Information(title: "Notes",information: _currentitemm.notes,),
+                    Item_Information(title: "Notes",information: _currentitemm.notes.isEmpty?"No Notes":_currentitemm.notes,),
                     Divider(),
                     Item_Information(title: "Status",information: _currentitemm.status?"Purchased":"Pending Purchase",),
                     Divider(),
