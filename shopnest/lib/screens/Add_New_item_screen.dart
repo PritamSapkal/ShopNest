@@ -90,7 +90,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
         quantity: _quantityController.text.trim(),
         notes: _notesController.text.trim(),
         status: false,
-        addedTime: TimeOfDay.now(),
+        addedTime:  DateTime.now(),
       );
 
       ref.read(masteritemlistProvider.notifier).addItem(newItem);

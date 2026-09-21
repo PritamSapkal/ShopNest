@@ -23,7 +23,7 @@ class Masteritemlist extends StateNotifier<List<Itemmodel>> {
     state = [
       for (final item in state)
         if (item.id == id)
-          item.copyWith(status: !item.status)
+          item.copyWith(status: !item.status, quantity: '')
         else
           item,
     ];

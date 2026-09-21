@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-String formatItemTime(TimeOfDay timeOfDay) {
+String formatItemTime( DateTime timeOfDay) {
   final now = DateTime.now();
 
   // 1. Convert TimeOfDay to a full DateTime object using current year/month/day

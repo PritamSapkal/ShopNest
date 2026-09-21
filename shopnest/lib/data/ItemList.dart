@@ -11,14 +11,14 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "2 pcs",
     notes: 'Fresh, organic preferred',
     status: false,
-    addedTime:TimeOfDay.now(),  ),
+    addedTime: DateTime.now(),  ),
   Itemmodel(
     name: 'Whole Milk',
     category: categoryDetails[ItemCategory.dairyAndEggs]!!,
     quantity: "1 L",
     notes: '3.5% fat content',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime:  DateTime.now(),
   ),
   Itemmodel(
     name: 'Sourdough Bread',
@@ -26,7 +26,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "12 pcs",
     notes: '1 loaf, freshly baked',
     status: true,
-    addedTime:   TimeOfDay.now(),
+    addedTime:    DateTime.now(),
   ),
   Itemmodel(
     name: 'Gala Apples',
@@ -34,7 +34,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "6 pcs",
     notes: 'Red ones preferred',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime:  DateTime.now(),
   ),
   Itemmodel(
     name: 'Free Range Eggs',
@@ -42,7 +42,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "12 pcs",
     notes: 'Size M eggs',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime:  DateTime.now(),
   ),
   Itemmodel(
     name: 'Sparkling Water',
@@ -50,7 +50,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "6 bottle",
     notes: 'Lime flavor if available',
     status: false,
-    addedTime:TimeOfDay.now(),
+    addedTime: DateTime.now(),
   ),
   Itemmodel(
     name: 'Basmati Rice',
@@ -58,7 +58,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "1 sack",
     notes: '5kg pack',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime: DateTime.now(),
   ),
   Itemmodel(
     name: 'Chocolate Chip Cookies',
@@ -66,7 +66,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "2 packets",
     notes: 'Dark chocolate',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime:  DateTime.now(),
   ),
   Itemmodel(
     name: 'Dishwashing Gel',
@@ -74,7 +74,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "1 packet",
     notes: 'Lemon fragrance, 500ml',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime: DateTime.now(),
   ),
   Itemmodel(
     name: 'Paracetamol Tablets',
@@ -82,7 +82,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "1",
     notes: '650mg strip for emergency',
     status: false,
-    addedTime: TimeOfDay.now(),
+    addedTime: DateTime.now(),
   ),
   Itemmodel(
     name: 'AA Alkaline Batteries',
@@ -90,7 +90,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "4 pcs",
     notes: 'For TV remote control',
     status: true, // Marked as completed/bought
-    addedTime: TimeOfDay.now(),
+    addedTime: DateTime.now(),
   ),
   Itemmodel(
     name: 'Greek Yogurt',
@@ -98,7 +98,7 @@ final List<Itemmodel> dummyShoppingList = [
     quantity: "3 cup",
     notes: 'Blueberry flavor',
     status: false,
-    addedTime:TimeOfDay.now(),
+    addedTime:DateTime.now(),
   ),
 
 

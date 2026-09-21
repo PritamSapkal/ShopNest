@@ -17,18 +17,18 @@ class Itemmodel {
   final String id;
   final String name;
   final CategoryUiProps category;
-  final dynamic quantity;
+  final String quantity;
   final String notes;
   final bool status;
-  final TimeOfDay addedTime;
+  final DateTime  addedTime;
 
   Itemmodel copyWith({
     String? name,
     CategoryUiProps? category,
-    dynamic quantity,
+    required String quantity,
     String? notes,
     bool? status,
-    TimeOfDay? addedTime,
+    DateTime ? addedTime,
   }) {
     return Itemmodel(
       id: id, // Retains original ID!
