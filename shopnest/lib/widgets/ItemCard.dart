@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/Add_New_item_screen.dart';
-
+import '../widgets/SuccessSnackBar.dart';
 import '../DataModel/ItemModel.dart';
 import '../Provider/MasterItemList.dart';
 import '../data/ItemCategory.dart';
@@ -153,9 +153,11 @@ class _ItemcardState extends ConsumerState<Itemcard> {
                         // Delete Button
                         InkWell(
                           onTap: () {
-                            ref
-                                .read(masteritemlistProvider.notifier)
-                                .deleteItemById(widget._currentitemm.id);
+                            ref.read(masteritemlistProvider.notifier).deleteItemById(widget._currentitemm.id);
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SuccessSnackBar.show("Item Deleted successfully!"),
+                            );
                           },
                           borderRadius: BorderRadius.circular(10.r),
                           child: Container(
