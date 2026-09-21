@@ -6,7 +6,9 @@ import 'package:shopnest/screens/Add_New_item_screen.dart';
 
 import '../DataModel/ItemModel.dart';
 import '../Provider/MasterItemList.dart';
+import '../data/ItemCategory.dart';
 import '../screens/ItemDetailPage.dart';
+import 'package:shopnest/data/IntroScreenList.dart';
 
 class Itemcard extends ConsumerStatefulWidget {
   Itemcard({required this._currentitemm, super.key});
@@ -20,6 +22,9 @@ class Itemcard extends ConsumerStatefulWidget {
 class _ItemcardState extends ConsumerState<Itemcard> {
   @override
   Widget build(BuildContext context) {
+
+    // Get UI properties from the selected ItemCategory
+    final categoryUi = categoryDetails[widget._currentitemm.category]!;
     return InkWell(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemdetailPage(currentitemm: widget._currentitemm,)));
@@ -46,13 +51,13 @@ class _ItemcardState extends ConsumerState<Itemcard> {
                   width: 45.w,
                   height: 45.h,
                   decoration: BoxDecoration(
-                    color: widget._currentitemm.category.backgroundColor,
+                    color: categoryUi.backgroundColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
                     child: Icon(
-                      widget._currentitemm.category.icon,
-                      color: widget._currentitemm.category.baseColor,
+                      categoryUi.icon,
+                      color:categoryUi.baseColor,
                     ),
                   ),
                 ),

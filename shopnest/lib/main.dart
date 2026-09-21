@@ -19,6 +19,15 @@ void main()async{
    Hive.registerAdapters();
 
    await Hive.openBox<Itemmodel>('items');
+
+  final box = Hive.box<Itemmodel>('items');
+  print('==============================');
+  print('MAIN HIVE BOX');
+  print('Box path: ${box.path}');
+  print('Box length: ${box.length}');
+  print('Box keys: ${box.keys.toList()}');
+  print('Box values: ${box.values.map((e) => e.name).toList()}');
+  print('==============================');
    return runApp(ProviderScope(child: MyApp()));
 }
 class MyApp extends ConsumerWidget {

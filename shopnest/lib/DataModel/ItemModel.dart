@@ -1,6 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'CategoryUiProps.dart';
 import 'package:hive_ce/hive.dart';
+
 part 'ItemModel.g.dart';
 
 @HiveType(typeId: 0)
@@ -22,7 +23,7 @@ class Itemmodel {
   final String name;
 
   @HiveField(2)
-  final CategoryUiProps category;
+  final ItemCategory category;
 
   @HiveField(3)
   final String quantity;
@@ -34,18 +35,18 @@ class Itemmodel {
   final bool status;
 
   @HiveField(6)
-  final DateTime  addedTime;
+  final DateTime addedTime;
 
   Itemmodel copyWith({
     String? name,
-    CategoryUiProps? category,
+    ItemCategory? category,
     String? quantity,
     String? notes,
     bool? status,
-    DateTime ? addedTime,
+    DateTime? addedTime,
   }) {
     return Itemmodel(
-      id: id, // Retains original ID!
+      id: id,
       name: name ?? this.name,
       category: category ?? this.category,
       quantity: quantity ?? this.quantity,

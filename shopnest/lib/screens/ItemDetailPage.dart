@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../DataModel/ItemModel.dart';
+import '../data/ItemCategory.dart';
 import '../widgets/formatItemTime.dart';
 
 class ItemdetailPage extends StatelessWidget {
@@ -65,13 +66,13 @@ class ItemdetailPage extends StatelessWidget {
                           width: 100.w,
                           height: 100.h,
                           decoration: BoxDecoration(
-                            color: _currentitemm.category.backgroundColor,
+                            color: categoryDetails[_currentitemm.category]?.backgroundColor,
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Center(
                             child: Icon(
-                              _currentitemm.category.icon,
-                              color: _currentitemm.category.baseColor,
+                              categoryDetails[_currentitemm.category]?.icon,
+                              color: categoryDetails[_currentitemm.category]?.baseColor,
                               size: 45.sp,
                             ),
                           ),
@@ -97,7 +98,7 @@ class ItemdetailPage extends StatelessWidget {
                           // Category type
                           Container(
                             decoration: BoxDecoration(
-                              color: _currentitemm.category.backgroundColor,
+                              color: categoryDetails[_currentitemm.category]?.backgroundColor,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -109,7 +110,7 @@ class ItemdetailPage extends StatelessWidget {
                                 child: Text(
                                   _currentitemm.category.name,
                                   style: GoogleFonts.poppins(
-                                    color: _currentitemm.category.baseColor,
+                                    color: categoryDetails[_currentitemm.category]?.baseColor,
                                     fontSize: 11.sp,
                                     fontWeight: FontWeight.bold,
                                   ),

@@ -32,7 +32,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
   late final TextEditingController _nameController;
   late final TextEditingController _quantityController;
   late final TextEditingController _notesController;
-  CategoryUiProps? _selectedCategory;
+  ItemCategory? _selectedCategory;
 
   bool get isEditMode => widget.existingItem != null;
 
@@ -46,13 +46,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
 
     // Match the category from existingItem with the instances in categoryDetails
     if (widget.existingItem != null) {
-      final existingCatName = widget.existingItem!.category.name.toLowerCase();
-      for (final entry in categoryDetails.entries) {
-        if (entry.value.name.toLowerCase() == existingCatName) {
-          _selectedCategory = entry.value;
-          break;
-        }
-      }
+      _selectedCategory = widget.existingItem!.category;
     }
   }
 
@@ -68,7 +62,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
     if (!_addNewItemformkey.currentState!.validate()) return;
 
     if (isEditMode) {
-      // 1. UPDATE EXISTING ITEM (Preserve id, status, and addedTime)
+      // 1. UPDATE EXISTING ITEM
       final updatedItem = widget.existingItem!.copyWith(
         name: _nameController.text.trim(),
         category: _selectedCategory!,
@@ -90,7 +84,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
         quantity: _quantityController.text.trim(),
         notes: _notesController.text.trim(),
         status: false,
-        addedTime:  DateTime.now(),
+        addedTime: DateTime.now(),
       );
 
       ref.read(masteritemlistProvider.notifier).addItem(newItem);
@@ -166,23 +160,27 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                         child: SizedBox(
                           height: 50.h,
                           width: double.infinity,
-                          child: DropdownButtonFormField<CategoryUiProps>(
+                          child: DropdownButtonFormField<ItemCategory>(
                             value: _selectedCategory,
                             isExpanded: true,
                             isDense: true,
+
                             onChanged: (value) {
                               setState(() {
                                 _selectedCategory = value;
                               });
                             },
+
                             validator: (value) {
                               if (value == null) {
                                 return "Select Category !";
                               }
                               return null;
                             },
+
                             borderRadius: BorderRadius.circular(20.r),
                             dropdownColor: Theme.of(context).cardColor,
+
                             decoration: InputDecoration(
                               hint: Text(
                                 '  Select Category',
@@ -194,10 +192,12 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                               ),
                               filled: true,
                               fillColor: Theme.of(context).focusColor,
+
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none,
                               ),
+
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: const BorderSide(
@@ -205,6 +205,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                                   width: 1.5,
                                 ),
                               ),
+
                               focusedErrorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: const BorderSide(
@@ -212,6 +213,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                                   width: 1,
                                 ),
                               ),
+
                               errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: const BorderSide(
@@ -220,24 +222,31 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                                 ),
                               ),
                             ),
+
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               size: 28.sp,
                             ),
+
                             items: categoryDetails.entries.skip(1).map((item) {
-                              return DropdownMenuItem<CategoryUiProps>(
-                                value: item.value,
+                              final category = item.key;
+                              final uiProps = item.value;
+
+                              return DropdownMenuItem<ItemCategory>(
+                                value: category,
                                 child: Row(
                                   children: [
                                     Icon(
-                                      item.value.icon,
-                                      color: item.value.baseColor,
+                                      uiProps.icon,
+                                      color: uiProps.baseColor,
                                       size: 20.sp,
                                     ),
+
                                     SizedBox(width: 14.w),
+
                                     Expanded(
                                       child: Text(
-                                        item.value.name,
+                                        uiProps.name,
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context)
                                             .textTheme

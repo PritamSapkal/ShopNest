@@ -18,7 +18,9 @@ class Filteredlistprovider extends StateNotifier<Filterlistmodel> {
     // Listens to master list changes (adds, deletes, checkbox toggles)
     // and re-applies the active filters automatically.
     _ref.listen<List<Itemmodel>>(AllItemListProvider, (previous, next) {
-      _applyCurrentFilter();
+      Future(() {
+        _applyCurrentFilter();
+      });
     });
   }
 
