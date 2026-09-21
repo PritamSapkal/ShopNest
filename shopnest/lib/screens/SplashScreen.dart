@@ -64,12 +64,9 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF59C76E), // Brighter green on the left
-              Color(0xFF4CB493)
-             ],
-            begin: AlignmentGeometry.topLeft,
-            end: AlignmentGeometry.bottomRight,
+            colors: [Color(0xff2E7D32), Color(0xff4CAF50)],
+            begin: AlignmentGeometry.topCenter,
+            end: AlignmentGeometry.bottomCenter,
           ),
         ),
         child: Column(
