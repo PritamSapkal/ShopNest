@@ -7,12 +7,14 @@ import 'package:shopnest/screens/SplashScreen.dart';
 
 import 'Provider/ThemeProvider.dart';
 import 'SharedPreferencess/AppThemePref.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
- // await  Hive.initFlutter();
 
-  return runApp(ProviderScope(child: MyApp()));
+   await  Hive.initFlutter();
+
+   return runApp(ProviderScope(child: MyApp()));
 }
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);

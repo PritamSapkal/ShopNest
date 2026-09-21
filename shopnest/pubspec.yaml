@@ -27,9 +27,9 @@ dependencies:
   intl: ^0.20.3
   flutter_staggered_animations: ^1.1.1
   shared_preferences: ^2.5.5
-  hive_flutter: ^1.1.0
   path_provider: ^2.1.6
   hive_ce: ^2.20.0
+  hive_ce_flutter: ^2.3.4
 
 dev_dependencies:
   flutter_test:
