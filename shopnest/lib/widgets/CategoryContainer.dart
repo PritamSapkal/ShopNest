@@ -28,7 +28,7 @@ class Categorycontainer extends ConsumerWidget {
             ],
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // First Conatiner shows teh category icon
               Hero(
@@ -64,11 +64,9 @@ class Categorycontainer extends ConsumerWidget {
                     ),
                 ),
               ),
-              Padding(padding:EdgeInsetsGeometry.symmetric(horizontal: 10),child: Text(Currentcategory.name,style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 13.sp),)),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text("6  Products",style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w600,fontSize: 12.sp),textAlign: TextAlign.left,),
-              ),
+
+              Padding(padding:EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 20),child: Text(Currentcategory.name,style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 13.sp),)),
+
             ],
           ),
         ),
