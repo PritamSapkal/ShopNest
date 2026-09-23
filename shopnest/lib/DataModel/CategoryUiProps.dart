@@ -15,7 +15,7 @@ enum ItemCategory {
   fruits,
 
   @HiveField(3)
-  dairyAndEggs,
+  dairy,
 
   @HiveField(4)
   bakery,
