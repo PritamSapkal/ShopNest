@@ -5,11 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/Provider/Providers.dart';
 import 'package:shopnest/screens/DashBoardScreen.dart';
-import 'package:shopnest/screens/SignUpPage.dart';
 import 'package:shopnest/widgets/GreenButton.dart';
-
 import '../Provider/userInfoProvider.dart';
-import '../widgets/TextButtonGreen.dart';
 import '../widgets/TextFieldLabel.dart';
 import '../widgets/TextFormFieldWidget.dart';
 

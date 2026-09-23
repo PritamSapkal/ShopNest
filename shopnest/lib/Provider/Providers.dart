@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../DataModel/CategoryUiProps.dart';
 import '../DataModel/ItemModel.dart';
 import '../data/ItemCategory.dart';
-import '../data/ItemList.dart';
 import 'MasterItemList.dart';
 // Handle the intro screen page index
 var IntroIndexProvider=StateProvider<int>((ref){
