@@ -35,7 +35,6 @@ class MyApp extends ConsumerWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
           // Light Theme
           theme: ThemeData.light().copyWith(
             // 1. Removes the expanding ripple wave globally
