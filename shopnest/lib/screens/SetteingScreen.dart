@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopnest/screens/SignInPage.dart';
+import '../Provider/MasterItemList.dart';
 import '../Provider/Providers.dart';
 import '../Provider/ThemeProvider.dart';
 import '../Provider/userInfoProvider.dart';
@@ -309,6 +310,9 @@ class Setteingscreen extends ConsumerWidget {
 
                   // Clear SharedPreferences and provider state
                   await ref.read(userInfoProvider.notifier).clearUser();
+
+                  // clear all the data of an item from the app
+                  await ref.read(masteritemlistProvider.notifier).clearAllItems();
 
                   // Check if the widget is still mounted after async operations
                   if (!context.mounted) return;
