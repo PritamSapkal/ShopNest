@@ -141,7 +141,7 @@ class _categoryitemScreenState extends ConsumerState<categoryitemScreen> {
                                   padding: const EdgeInsets.all(10),
                                   // Fixed the typo from 'EdgeInsetsGeometry' to 'EdgeInsets'
                                   child: Itemcard(
-                                    currentitemm: currentcategorylist[index],
+                                    currentItem: currentcategorylist[index],
                                   ),
                                 ),
                               ),

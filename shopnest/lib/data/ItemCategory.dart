@@ -21,7 +21,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     baseColor: Colors.redAccent,
     backgroundColor: Colors.redAccent.withOpacity(0.08),
   ),
-  ItemCategory.dairyAndEggs: CategoryUiProps(
+  ItemCategory.dairy: CategoryUiProps(
     name: 'Dairy',
     icon: Icons.water_drop_outlined,
     baseColor: Colors.blue,
