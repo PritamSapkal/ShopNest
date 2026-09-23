@@ -122,7 +122,7 @@ class ItemdetailPage extends StatelessWidget {
                           //Pending or completed.
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.orange.withOpacity(0.1),
+                              color: _currentitemm.status?Colors.orange.withOpacity(0.1):Colors.red.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -131,17 +131,23 @@ class ItemdetailPage extends StatelessWidget {
                                   horizontal: 10,
                                   vertical: 5,
                                 ),
-                                child: Text(
-                                  _currentitemm.status ? "Purchased" : "Pending",
+                                child: _currentitemm.status ? Text(
+                                  "Purchased",
                                   style: GoogleFonts.poppins(
                                     color: Colors.orange,
                                     fontSize: 11.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                ),
+                                ):Text(
+                                  "Pending",
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.red,
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               ),
                             ),
-                          ),
+                          ),)
                         ],
                       ),
                     ),
@@ -151,7 +157,7 @@ class ItemdetailPage extends StatelessWidget {
             ),
             //Second Container
             Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+              padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -204,16 +210,20 @@ class Item_Information extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 10,vertical: 5),
-            child: Text(
-              title,
-              style: GoogleFonts.poppins(
-                color: Colors.grey,
-                fontWeight: FontWeight.w700,
-                fontSize: 12.sp,
+            child: SizedBox(
+              width: 60.w,
+              child: Text(
+                title,
+                style: GoogleFonts.poppins(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 12.sp,
+                ),
               ),
             ),
           ),
          SizedBox(width: 10.w,),
+         Spacer(),
          Expanded(
            child: Padding(
                padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
