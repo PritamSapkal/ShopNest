@@ -45,6 +45,13 @@ class Masteritemlist extends StateNotifier<List<Itemmodel>> {
 
     _itemsBox.put(id, updatedItem);
   }
+
+
+  // used to clear all the items data
+  Future<void> clearAllItems() async {
+    await _itemsBox.clear();
+    state = [];
+  }
 }
 
 final masteritemlistProvider =
