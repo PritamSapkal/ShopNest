@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../DataModel/CategoryUiProps.dart';
 import '../DataModel/ItemModel.dart';
 import '../Provider/FilteredListProvider.dart';
+import '../Provider/MasterItemList.dart';
 import '../Provider/Providers.dart';
 import 'ItemCard.dart';
 import 'TextButtonGreen.dart';
@@ -25,6 +26,81 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
   void dispose() {
     _categoryScrollController.dispose();
     super.dispose();
+  }
+
+  Future<bool?> _showLogoutConfirmationDialog(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: theme.dialogBackgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          icon: Icon(
+            Icons.warning_amber,
+            color: Colors.redAccent,
+            size: 38.sp,
+          ),
+          title: Text(
+            "Clear All Items?",
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
+            "All items will be permanently erased. You won't be able to recover them.",
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontSize: 13.sp,
+              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          actions: [
+            // Cancel Button
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(
+                "Cancel",
+                style: GoogleFonts.poppins(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600,
+                  color: theme.textTheme.bodyMedium?.color,
+                ),
+              ),
+            ),
+            // Confirm / Delete Data Button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              ),
+              onPressed: (){
+                ref.read(masteritemlistProvider.notifier).clearAllItems();
+                Navigator.of(dialogContext).pop(true);
+              },
+              child: Text(
+                "Clear Items",
+                style: GoogleFonts.poppins(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _scrollToFirstCategory() {
@@ -123,7 +199,9 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
                   context,
                 ).textTheme.titleMedium!.copyWith(fontSize: 14.sp),
               ),
+
               SizedBox(width: 5.w),
+
               Text(
                 "(${itemList.length} items)",
                 style: GoogleFonts.poppins(
@@ -133,12 +211,24 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
                 ),
               ),
               const Spacer(),
+
+              // See All text button
               Textbuttongreen(
                 text: "See All",
                 textsize: 12.sp,
                 OnTap: () {
                   ref.read(FilterListProvider.notifier).setItemCategortoAll();
                   _scrollToFirstCategory();
+                },
+              ),
+
+              // Clear All text Button
+              Textbuttongreen(
+                text: "Clear All",
+                textsize: 12.sp,
+                color: Colors.red,
+                OnTap: (){
+                  _showLogoutConfirmationDialog(context);
                 },
               ),
             ],
@@ -175,7 +265,7 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
                       child: Itemcard(
                         key: ValueKey(itemList[index].id),
                         // Key helps smooth animation on delete
-                        currentitemm: itemList[index],
+                        currentItem: itemList[index],
                       ),
                     );
                   },
