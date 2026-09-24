@@ -20,26 +20,15 @@ class categoryitemScreen extends ConsumerStatefulWidget {
 }
 
 class _categoryitemScreenState extends ConsumerState<categoryitemScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    // This schedules the execution to happen immediately after the build phase completes
-    Future.microtask(() {
-      ref
-          .read(CategorySpecificListProvider.notifier)
-          .getItemListWithCount(categoryDetails[widget.MapKey]!.name);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     // get the Category data from th map
-    final CategoryUiProps currentcategory = categoryDetails[widget.MapKey]!;
-    // get the particular category list
-    List<Itemmodel> currentcategorylist = ref
-        .watch(CategorySpecificListProvider)
-        .filteredList;
+    final CategoryUiProps currentcategory =
+    categoryDetails[widget.MapKey]!;
+
+    final currentcategorylist = ref.watch(CategorySpecificListProvider(currentcategory.name,),);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
