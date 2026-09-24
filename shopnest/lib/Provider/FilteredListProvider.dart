@@ -15,8 +15,7 @@ class Filteredlistprovider extends StateNotifier<Filterlistmodel> {
           SelectedCategory: "All",
         ),
       ) {
-    // Listens to master list changes (adds, deletes, checkbox toggles)
-    // and re-applies the active filters automatically.
+
     _ref.listen<List<Itemmodel>>(AllItemListProvider, (previous, next) {
       Future(() {
         _applyCurrentFilter();
@@ -67,7 +66,22 @@ class Filteredlistprovider extends StateNotifier<Filterlistmodel> {
 
   void getSerchedItemList(String item) {
     _currentSearchQuery = item.trim().toLowerCase();
-    _applyCurrentFilter();
+    final masterItemsList = _ref.read(AllItemListProvider);
+    List<Itemmodel> updatedList = masterItemsList;
+    if (_currentSearchQuery.isNotEmpty) {
+      updatedList = updatedList
+          .where(
+            (item) => item.name.toString().toLowerCase().contains(
+                  _currentSearchQuery,
+                ),
+          )
+          .toList();
+    }
+    state = Filterlistmodel(
+      FilteredList: updatedList,
+      SelectedCategory: 'All',
+    );
+
   }
 
   void setItemCategortoAll() {
