@@ -36,11 +36,7 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
-          icon: Icon(
-            Icons.warning_amber,
-            color: Colors.redAccent,
-            size: 38.sp,
-          ),
+          icon: Icon(Icons.warning_amber, color: Colors.redAccent, size: 38.sp),
           title: Text(
             "Clear All Items?",
             style: theme.textTheme.titleMedium?.copyWith(
@@ -58,7 +54,10 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
             textAlign: TextAlign.center,
           ),
           actionsAlignment: MainAxisAlignment.spaceBetween,
-          actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          actionsPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 12.h,
+          ),
           actions: [
             // Cancel Button
             TextButton(
@@ -81,7 +80,7 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               ),
-              onPressed: (){
+              onPressed: () {
                 ref.read(masteritemlistProvider.notifier).clearAllItems();
                 Navigator.of(dialogContext).pop(true);
               },
@@ -121,6 +120,46 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
 
     return Column(
       children: [
+        // SearchBar
+        Container(
+          color: Theme.of(context).appBarTheme.backgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: TextField(
+              onChanged: (value) {
+                _scrollToFirstCategory();
+                ref.read(FilterListProvider.notifier).getSerchedItemList(value);
+              },
+              cursorColor: Theme.of(context).textSelectionTheme.cursorColor,
+              cursorHeight: 20,
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Theme.of(context).appBarTheme.foregroundColor,
+                prefixIcon: Icon(Icons.search_sharp, color: Colors.grey),
+                hintText: "Search shopping items...",
+                hintStyle: GoogleFonts.poppins(
+                  color: Colors.grey,
+                  fontSize: 12.sp,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.grey, width: 0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.grey, width: 0),
+                ),
+              ),
+            ),
+          ),
+        ),
+
+        SizedBox(height: 7.h,),
+
         // Horizontal Category List View
         SizedBox(
           height: 34.h,
@@ -224,7 +263,7 @@ class _CategoryAndItemListState extends ConsumerState<CategoryAndItemList> {
                 text: "Clear All",
                 textsize: 12.sp,
                 color: Colors.red,
-                OnTap: (){
+                OnTap: () {
                   _showLogoutConfirmationDialog(context);
                 },
               ),
