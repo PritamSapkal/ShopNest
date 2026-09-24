@@ -16,6 +16,7 @@ void main() async {
 
   Hive.registerAdapters();
 
+
   await Hive.openBox<Itemmodel>('items');
 
   await SystemChrome.setPreferredOrientations([
