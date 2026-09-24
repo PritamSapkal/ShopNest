@@ -1,21 +1,32 @@
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shopnest/DataModel/ItemModel.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
-import '../DataModel/SpecificCVategoryLIstCla.dart';
+import '../DataModel/ItemModel.dart';
 import 'Providers.dart';
-class Specificcategorylistprovider extends StateNotifier<Specificcvategorylistcla>{
-  final Ref _ref;
-  Specificcategorylistprovider(this._ref):super(
-      Specificcvategorylistcla(filteredList: _ref.watch(AllItemListProvider), TotalItem:_ref.watch(AllItemListProvider).length)
-  );
-  void getItemListWithCount(String Categoryname){
-    List<Itemmodel> completelist=  _ref.read(AllItemListProvider);
-    List<Itemmodel> filteredList;
-    filteredList=completelist.where((item)=>item.category.name.toLowerCase().toString()==Categoryname.toLowerCase().toString()).toList();
-    state=Specificcvategorylistcla(filteredList:filteredList,TotalItem:filteredList.length);
+
+class Specificcategorylistprovider extends StateNotifier<List<Itemmodel>> {
+  final Ref ref;
+  final String categoryName;
+
+  Specificcategorylistprovider(this.ref, this.categoryName)
+    : super(   _getFilteredList(ref.read(AllItemListProvider), categoryName,),
+      ) {
+
+    ref.listen<List<Itemmodel>>(AllItemListProvider, (previous, next) {
+      final filteredList = _getFilteredList(next, categoryName);
+      state = filteredList;
+    });
+  }
+
+  static List<Itemmodel> _getFilteredList(List<Itemmodel> completeList, String categoryName,) {
+    return completeList.where((item) => item.category.name.toLowerCase() == categoryName.toLowerCase(),).toList();
+  }
+
+  List<Itemmodel> getFilteredList() {
+    return state;
   }
 }
-var CategorySpecificListProvider =StateNotifierProvider<Specificcategorylistprovider,Specificcvategorylistcla>((ref){
-  return Specificcategorylistprovider(ref);
-});
+
+final CategorySpecificListProvider = StateNotifierProvider.family<Specificcategorylistprovider, List<Itemmodel>, String>((ref, categoryName) {
+      return Specificcategorylistprovider(ref, categoryName);
+    });
