@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_ce/hive.dart';
 import 'package:shopnest/DataModel/ItemModel.dart';
 import 'package:shopnest/hive_registrar.g.dart';
 import 'package:shopnest/screens/SplashScreen.dart';
-
 import 'Provider/ThemeProvider.dart';
 import 'SharedPreferencess/AppThemePref.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
-
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-   await  Hive.initFlutter();
+  await Hive.initFlutter();
 
-   Hive.registerAdapters();
+  Hive.registerAdapters();
 
-   await Hive.openBox<Itemmodel>('items');
+  await Hive.openBox<Itemmodel>('items');
 
-  final box = Hive.box<Itemmodel>('items');
-   return runApp(ProviderScope(child: MyApp()));
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  runApp(ProviderScope(child: MyApp(),),);
 }
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
