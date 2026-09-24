@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopnest/screens/Add_New_item_screen.dart';
 import '../widgets/Category_Item_List.dart';
-import '../widgets/SearchBar.dart';
 
 class Homescreen extends StatelessWidget {
+  const Homescreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,19 +49,8 @@ class Homescreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Search bar for serching items
-            Searchbar(),
-            SizedBox(height: 10.h),
-            // category horizontal listview
-            Expanded(child: CategoryAndItemList()),
-          ],
-        ),
-      ),
+
+      body: Expanded(child: CategoryAndItemList()),
     );
   }
 }
