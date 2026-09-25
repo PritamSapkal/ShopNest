@@ -67,6 +67,7 @@ class _DashboardscreenState extends ConsumerState<Dashboardscreen> {
             .backgroundColor,
         title:appbarwidget,
       ),
+
       body:GestureDetector(
         onHorizontalDragUpdate: (details) {
           // Detect even a 5px swipe

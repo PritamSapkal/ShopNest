@@ -50,7 +50,7 @@ class Homescreen extends StatelessWidget {
         ),
       ),
 
-      body: Expanded(child: CategoryAndItemList()),
+      body: CategoryAndItemList(),
     );
   }
 }
