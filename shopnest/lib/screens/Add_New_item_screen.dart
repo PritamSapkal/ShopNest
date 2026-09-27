@@ -307,14 +307,15 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                           maxLines: 4,
                           controller: _notesController,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 15.h),
-                            hintText: "    e.g. Fresh ",
+                            contentPadding: EdgeInsets.symmetric(vertical: 15.h,horizontal: 10.w),
+                            hintText: "e.g. Fresh ",
                             hintStyle: GoogleFonts.poppins(
                               fontSize: 14.sp,
                               wordSpacing: 2.sp,
                               color: Colors.grey,
                               fontWeight: FontWeight.w500,
                             ),
+
                             filled: true,
                             fillColor: Theme.of(context).focusColor,
                             enabledBorder: OutlineInputBorder(

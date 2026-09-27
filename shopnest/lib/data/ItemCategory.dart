@@ -40,7 +40,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     backgroundColor: Colors.red.withOpacity(0.08),
   ),
   ItemCategory.kirana: CategoryUiProps(
-    name: 'Staples',
+    name: 'Kirana',
     icon:Icons.grain_outlined,
     baseColor: Colors.brown,
     backgroundColor: Colors.brown.withOpacity(0.08),
@@ -52,7 +52,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     backgroundColor: Colors.purple.withOpacity(0.08),
   ),
   ItemCategory.drinks: CategoryUiProps(
-    name: 'Beverages',
+    name: 'Drinks',
     icon:Icons.local_drink_outlined,
     baseColor: Colors.blueAccent,
     backgroundColor: Colors.blueAccent.withOpacity(0.08),
