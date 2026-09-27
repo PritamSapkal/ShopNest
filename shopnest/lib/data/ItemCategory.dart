@@ -73,7 +73,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     name: 'Electronics',
     icon:Icons.power_outlined,
     baseColor: Colors.blue,
-    backgroundColor: Colors.yellow.withOpacity(0.08),
+    backgroundColor: Colors.blue.withOpacity(0.08),
   ),
   ItemCategory.others: CategoryUiProps(
     name: 'Others',
