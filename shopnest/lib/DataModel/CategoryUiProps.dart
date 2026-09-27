@@ -24,21 +24,24 @@ enum ItemCategory {
   meatAndSeafood,
 
   @HiveField(6)
-  staplesAndGrains,
+  kirana,
 
   @HiveField(7)
   snacksAndSweets,
 
   @HiveField(8)
-  beverages,
+  drinks,
 
   @HiveField(9)
-  householdAndClean,
+  electronics,
 
   @HiveField(10)
-  healthAndCare,
+  householdAndClean,
 
   @HiveField(11)
+  healthAndCare,
+
+  @HiveField(12)
   others,
 }
 

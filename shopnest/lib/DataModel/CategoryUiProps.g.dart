@@ -26,16 +26,18 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
       case 5:
         return ItemCategory.meatAndSeafood;
       case 6:
-        return ItemCategory.staplesAndGrains;
+        return ItemCategory.kirana;
       case 7:
         return ItemCategory.snacksAndSweets;
       case 8:
-        return ItemCategory.beverages;
+        return ItemCategory.drinks;
       case 9:
-        return ItemCategory.householdAndClean;
+        return ItemCategory.electronics;
       case 10:
-        return ItemCategory.healthAndCare;
+        return ItemCategory.householdAndClean;
       case 11:
+        return ItemCategory.healthAndCare;
+      case 12:
         return ItemCategory.others;
       default:
         return ItemCategory.all;
@@ -57,18 +59,20 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
         writer.writeByte(4);
       case ItemCategory.meatAndSeafood:
         writer.writeByte(5);
-      case ItemCategory.staplesAndGrains:
+      case ItemCategory.kirana:
         writer.writeByte(6);
       case ItemCategory.snacksAndSweets:
         writer.writeByte(7);
-      case ItemCategory.beverages:
+      case ItemCategory.drinks:
         writer.writeByte(8);
-      case ItemCategory.householdAndClean:
+      case ItemCategory.electronics:
         writer.writeByte(9);
-      case ItemCategory.healthAndCare:
+      case ItemCategory.householdAndClean:
         writer.writeByte(10);
-      case ItemCategory.others:
+      case ItemCategory.healthAndCare:
         writer.writeByte(11);
+      case ItemCategory.others:
+        writer.writeByte(12);
     }
   }
 

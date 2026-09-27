@@ -39,7 +39,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     baseColor: Colors.red,
     backgroundColor: Colors.red.withOpacity(0.08),
   ),
-  ItemCategory.staplesAndGrains: CategoryUiProps(
+  ItemCategory.kirana: CategoryUiProps(
     name: 'Staples',
     icon:Icons.grain_outlined,
     baseColor: Colors.brown,
@@ -51,7 +51,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     baseColor: Colors.purple,
     backgroundColor: Colors.purple.withOpacity(0.08),
   ),
-  ItemCategory.beverages: CategoryUiProps(
+  ItemCategory.drinks: CategoryUiProps(
     name: 'Beverages',
     icon:Icons.local_drink_outlined,
     baseColor: Colors.blueAccent,
@@ -68,6 +68,12 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     icon:Icons.vaccines_outlined,
     baseColor: Colors.pink,
     backgroundColor: Colors.pink.withOpacity(0.08),
+  ),
+  ItemCategory.electronics: CategoryUiProps(
+    name: 'Electronics',
+    icon:Icons.power_outlined,
+    baseColor: Colors.blue,
+    backgroundColor: Colors.yellow.withOpacity(0.08),
   ),
   ItemCategory.others: CategoryUiProps(
     name: 'Others',
