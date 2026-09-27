@@ -147,7 +147,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                         child: Textformfieldwidget(
                           controller: _nameController,
                           isObscure: false,
-                          hinttext: "       e.g. Organic Spinach",
+                          hinttext: "e.g. Organic Spinach",
                           errormessage: "Enter Item name",
                         ),
                       ),
@@ -183,7 +183,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
 
                             decoration: InputDecoration(
                               hint: Text(
-                                '  Select Category',
+                                'Select Category',
                                 style: GoogleFonts.poppins(
                                   fontSize: 13.sp,
                                   color: Colors.grey,
@@ -270,7 +270,7 @@ class _AddNewItemScreenState extends ConsumerState<AddNewItemScreen> {
                         child: Textformfieldwidget(
                           controller: _quantityController,
                           isObscure: false,
-                          hinttext: "       e.g. 2 pcs, 2 Kg",
+                          hinttext: "e.g. 2 pcs, 2 Kg",
                           errormessage: "Enter Quantity of Item",
                         ),
                       ),

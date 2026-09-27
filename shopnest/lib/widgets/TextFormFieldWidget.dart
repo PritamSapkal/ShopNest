@@ -29,7 +29,8 @@ class Textformfieldwidget extends StatelessWidget{
       onSaved: (value){},
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
-          vertical: 15.h,   // Decreasing this lowers the height
+          vertical: 15.h,
+          horizontal: 10.w,// Decreasing this lowers the height
         ),
         hintText: hinttext,
         hintStyle: GoogleFonts.poppins(fontSize: 13.sp,wordSpacing:2.sp,color: Colors.grey,fontWeight: FontWeight.w500),
