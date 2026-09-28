@@ -28,7 +28,7 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
   Future<void> _checkAuthAndNavigate() async {
     // 1. Explicitly wait for both the 3-second timer and the storage read
     await Future.wait([
-      Future.delayed(const Duration(milliseconds: 5000)),
+      Future.delayed(const Duration(milliseconds: 2000)),
       ref.read(userInfoProvider.notifier).loadUser(),
     ]);
 
