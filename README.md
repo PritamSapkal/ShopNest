@@ -2,15 +2,15 @@
 
 # 🛍️ ShopNest
 
-### A Modern Flutter-Based Shopping & Item Management Application
+### Offline-First Grocery & Shopping List Management Mobile App
 
 <p>
-  <b>Organize • Manage • Track</b>
+  <b>Plan Smart • Organize Faster • Shop Better</b>
 </p>
 
 <p>
   <a href="https://github.com/PritamSapkal/ShopNest/releases/download/V1.0.0/ShopNest_V1.0.0.apk">
-    <img src="https://img.shields.io/badge/Download%20APK-V1.0.0-4CAF50?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
+    <img src="https://img.shields.io/badge/Download%20APK-V1.0.0-2E7D32?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
   </a>
   &nbsp;
   <a href="https://github.com/PritamSapkal/ShopNest/releases/tag/V1.0.0">
@@ -19,75 +19,88 @@
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square&logo=flutter&logoColor=white">
-  <img src="https://img.shields.io/badge/Dart-3.x-0175C2?style=flat-square&logo=dart&logoColor=white">
-  <img src="https://img.shields.io/badge/Riverpod-State%20Management-7E57C2?style=flat-square">
-  <img src="https://img.shields.io/badge/Hive-Local%20Storage-FFB300?style=flat-square">
-  <img src="https://img.shields.io/badge/Android-Supported-3DDC84?style=flat-square&logo=android&logoColor=white">
+  <img src="https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square&logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Dart-3.x-0175C2?style=flat-square&logo=dart&logoColor=white" alt="Dart">
+  <img src="https://img.shields.io/badge/Riverpod-State%20Management-7E57C2?style=flat-square" alt="Riverpod">
+  <img src="https://img.shields.io/badge/Hive-Local%20NoSQL-FFA000?style=flat-square" alt="Hive">
+  <img src="https://img.shields.io/badge/Architecture-Clean%20%2F%20Modular-blue?style=flat-square" alt="Architecture">
+  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android">
 </p>
 
 </div>
 
 ---
 
-## 📖 About ShopNest
+## 📖 Overview
 
-**ShopNest** is a modern Flutter-based shopping and item management application designed to help users easily **add, organize, manage, and track their items** in one place.
+**ShopNest** is a fast, lightweight, and offline-first mobile application designed to simplify daily grocery runs, pantry restocking, and shopping list organization. Built with **Flutter**, **Riverpod**, and **Hive**, the app guarantees zero network latency by storing and querying all data locally on-device.
 
-The application focuses on providing a clean and responsive user experience while demonstrating practical Flutter development concepts such as **Riverpod state management, Hive local storage, responsive UI design, reusable widgets, navigation, themes, and animations**.
+From dynamic category filtering and real-time search queries to multi-theme toggles and purchase status tracking, ShopNest demonstrates scalable architecture patterns, reactive UI state management, and modern Material 3 design principles.
 
 ---
 
-## ✨ Features
+## 📸 Application Showcase
+
+<div align="center">
+
+### ☀️ Light Mode Experience
+
+|                            Splash & Onboarding                             |                              Empty State                               |                              Dashboard & Search                              |
+|:--------------------------------------------------------------------------:|:----------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
+| <img src="screenshots/SplashScreen.png" width="220" alt="Splash Screen" /> | <img src="screenshots/EmptyState.png" width="220" alt="Empty State" /> | <img src="screenshots/DashBoardAndSearch.png" width="220" alt="Dashboard" /> |
+
+|                                Category Hub                                |                              Item Details                               |                                  Settings & Profile                                   |
+|:--------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
+| <img src="screenshots/CategoryHub.png" width="220" alt="Categories Hub" /> | <img src="screenshots/ItemDetail.png" width="220" alt="Item Details" /> | <img src="screenshots/SettingScreenLight.png" width="220" alt="Settings & Profile" /> |
+
+### 🌙 Dark Mode Experience
+
+|                             Dark Dashboard                              |                             Filtered Search                              |                                Dark Category Hub                                |                                 Settings & Profile                                  |
+|:-----------------------------------------------------------------------:|:------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|
+| <img src="screenshots/DarkDashBoard.png" width="200" alt="Dark Home" /> | <img src="screenshots/FilteredList.png" width="200" alt="Dark Filter" /> | <img src="screenshots/DarkCategoryHub.png" width="200" alt="Dark Categories" /> | <img src="screenshots/DarkSettingAndProfile.png" width="200" alt="Dark Settings" /> |
+
+</div>
+
+---
+
+## ✨ Key Features
 
 <table>
 <tr>
-<td width="50%">
+<td width="50%" valign="top">
 
-### 📦 Item Management
-
-* ➕ Add new items
-* ✏️ Edit existing items
-* 🗑️ Delete items
-* 📄 View item details
-* ✅ Track item status
+### 🛒 Core Shopping & CRUD
+* **Effortless Item Creation:** Add items with name, category, quantity unit (`kg`, `pcs`, `g`, `L`), and optional notes.
+* **Instant Edit & Delete:** Seamlessly update item attributes or delete redundant entries in real time.
+* **Purchase Status Tracking:** Interactive check toggles to differentiate pending vs. purchased grocery items.
+* **Detailed Item View:** Comprehensive modal inspecting metadata, notes, timestamp, and purchase status.
 
 </td>
+<td width="50%" valign="top">
 
-<td width="50%">
-
-### 🗂️ Organization
-
-* 🏷️ Category-based organization
-* 🔢 Quantity tracking
-* 📝 Item notes
-* 🎯 Easy item identification
-* 📋 Clean item listing
+### 🔍 Discovery & Filtering
+* **Real-Time Live Search:** Fast item query matching across your entire database.
+* **Horizontal Filter Chips:** One-tap filtering by category (Vegetables, Fruits, Dairy, Kirana, etc.).
+* **Category Grid Hub:** Dedicated tab providing high-level category cards with item counts.
+* **Quick Reset Actions:** Instant "See All" and "Clear All" batch operations.
 
 </td>
 </tr>
-
 <tr>
-<td width="50%">
+<td width="50%" valign="top">
 
-### 💾 Data & State
-
-* 🐝 Hive local database
-* ⚡ Riverpod state management
-* 💽 Persistent local data
-* 🔄 Reactive UI updates
+### ⚡ Offline-First Architecture
+* **Hive NoSQL Storage:** High-performance, lightweight key-value database running entirely locally.
+* **Riverpod State Management:** Fully reactive providers ensuring zero UI lag and clean separation of concerns.
+* **Session Persistence:** User profile info and settings saved via `SharedPreferences`.
 
 </td>
+<td width="50%" valign="top">
 
-<td width="50%">
-
-### 🎨 UI & Experience
-
-* 🌙 Light & Dark themes
-* 📱 Responsive design
-* ✨ Smooth animations
-* 🎨 Modern Material UI
-* 👆 Interactive controls
+### 🎨 UI & User Experience
+* **Dynamic Theming:** Seamless switching between **Light Theme**, **Dark Theme**, and **System Default**.
+* **Zero-State Handling:** Illustrated empty screen guiding users to add their first grocery item.
+* **Safe Logout Protocol:** Guarded confirmation dialog preventing accidental local data loss.
 
 </td>
 </tr>
@@ -95,230 +108,35 @@ The application focuses on providing a clean and responsive user experience whil
 
 ---
 
-## 📱 Download
+## 🛠️ Tech Stack & Dependencies
 
-<div align="center">
-
-### 🚀 ShopNest V1.0.0
-
-<p>
-  The first stable release of ShopNest is now available for Android.
-</p>
-
-<a href="https://github.com/PritamSapkal/ShopNest/releases/download/V1.0.0/ShopNest_V1.0.0.apk">
-  <img src="https://img.shields.io/badge/⬇️%20DOWNLOAD%20APK-ShopNest%20V1.0.0-4CAF50?style=for-the-badge" alt="Download ShopNest APK">
-</a>
-
-<br><br>
-
-<a href="https://github.com/PritamSapkal/ShopNest/releases/tag/V1.0.0">
-  View Release Details
-</a>
-
-</div>
-
-### 📲 Installation
-
-1. Download the **ShopNest V1.0.0 APK** using the button above.
-2. Open the downloaded `.apk` file on your Android device.
-3. If prompted, allow installation from unknown sources.
-4. Install the application.
-5. Open **ShopNest** and start managing your items.
-
-> **Note:** ShopNest is currently available as an Android APK.
+| Tool / Package | Purpose |
+| :--- | :--- |
+| **[Flutter](https://flutter.dev/)** | Cross-platform UI toolkit |
+| **[Dart](https://dart.dev/)** | Core programming language |
+| **[flutter_riverpod](https://pub.dev/packages/flutter_riverpod)** | Compile-safe reactive state management |
+| **[hive_flutter](https://pub.dev/packages/hive_flutter)** | Ultra-fast on-device NoSQL storage |
+| **[shared_preferences](https://pub.dev/packages/shared_preferences)** | Persistent storage for theme flags and user session |
+| **[google_fonts](https://pub.dev/packages/google_fonts)** | Clean typography and styling |
+| **[flutter_screenutil](https://pub.dev/packages/flutter_screenutil)** | Adaptive and responsive UI layout |
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-
-### 🏠 Home Screen
-
-<!-- Replace the path below with your actual screenshot -->
-
-<img src="screenshots/home.png" width="250" alt="ShopNest Home Screen">
-
-### ➕ Add Item
-
-<!-- Replace the path below with your actual screenshot -->
-
-<img src="screenshots/add_item.png" width="250" alt="ShopNest Add Item Screen">
-
-### 📄 Item Details
-
-<!-- Replace the path below with your actual screenshot -->
-
-<img src="screenshots/item_details.png" width="250" alt="ShopNest Item Details">
-
-</div>
-
-> 📌 Add your screenshots inside a `screenshots` folder in the repository and update the filenames above if required.
-
----
-
-## 🛠️ Tech Stack
-
-<table>
-<tr>
-<th>Technology</th>
-<th>Purpose</th>
-</tr>
-
-<tr>
-<td>🐦 <b>Flutter</b></td>
-<td>Cross-platform application development</td>
-</tr>
-
-<tr>
-<td>🎯 <b>Dart</b></td>
-<td>Application programming language</td>
-</tr>
-
-<tr>
-<td>⚡ <b>Riverpod</b></td>
-<td>State management</td>
-</tr>
-
-<tr>
-<td>🐝 <b>Hive</b></td>
-<td>Local database and data persistence</td>
-</tr>
-
-<tr>
-<td>💾 <b>SharedPreferences</b></td>
-<td>Local preference storage</td>
-</tr>
-
-<tr>
-<td>🔤 <b>Google Fonts</b></td>
-<td>Typography and UI styling</td>
-</tr>
-
-<tr>
-<td>📐 <b>Flutter ScreenUtil</b></td>
-<td>Responsive UI design</td>
-</tr>
-
-<tr>
-<td>🎨 <b>Material Design</b></td>
-<td>User interface components</td>
-</tr>
-
-</table>
-
----
-
-
-
-## 🚀 Getting Started
-
-If you want to run ShopNest locally, make sure you have Flutter installed on your system.
-
-### Prerequisites
-
-* Flutter SDK
-* Dart SDK
-* Android Studio or VS Code
-* Android Emulator or physical Android device
-* Git
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/PritamSapkal/ShopNest.git
-```
-
-### 2️⃣ Navigate to the Project
-
-```bash
-cd ShopNest
-```
-
-### 3️⃣ Install Dependencies
-
-```bash
-flutter pub get
-```
-
-### 4️⃣ Run the Application
-
-```bash
-flutter run
-```
-
----
-
-## 🎯 Project Objectives
-
-ShopNest was developed to gain practical experience in modern Flutter application development and to demonstrate the implementation of:
-
-* Flutter UI development
-* Dart programming
-* Riverpod state management
-* Hive local database
-* Persistent local storage
-* Responsive layouts
-* Navigation between screens
-* Reusable widgets
-* Theme management
-* Animations
-* CRUD operations
-* Clean and maintainable code structure
-
----
-
-## 🔮 Future Improvements
-
-Some features that may be considered for future versions:
-
-* ☁️ Cloud data synchronization
-* 🔐 User authentication
-* 🔄 Backup and restore
-* 🔔 Reminder notifications
-* 📊 Shopping and spending insights
-* 📱 Additional platform support
-
----
-
-
-
-<br>
-
-<a href="https://github.com/PritamSapkal">
-  <img src="https://img.shields.io/badge/GitHub-PritamSapkal-181717?style=for-the-badge&logo=github&logoColor=white">
-</a>
-
-<a href="https://www.linkedin.com/">
-  <img src="https://img.shields.io/badge/LinkedIn-Pritam%20Sapkal-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white">
-</a>
-
-
-
----
-
-## ⭐ Support the Project
-
-If you find **ShopNest** useful or interesting, consider giving the repository a ⭐.
-
-Your feedback, suggestions, and contributions are always welcome!
-
-<div align="center">
-
-### 🛍️ ShopNest
-
-**Organize your items. Manage your list. Keep everything in one place.**
-
-<br>
-
-<a href="https://github.com/PritamSapkal/ShopNest/releases/download/V1.0.0/ShopNest_V1.0.0.apk">
-  <img src="https://img.shields.io/badge/⬇️%20GET%20SHOPNEST-V1.0.0-4CAF50?style=for-the-badge" alt="Get ShopNest">
-</a>
-
-</div>
-
----
-
-## 📄 License
-
-This project is available for **educational and personal use**.
+## 📂 Project Architecture
+
+```text
+lib/
+├── core/
+│   ├── constants/          # Colors, strings, asset paths, category definitions
+│   ├── theme/              # Light and Dark theme configurations
+│   └── utils/              # Dialogs, snackbars, and formatters
+├── models/                 # Hive TypeAdapters and item data models
+├── providers/              # Riverpod StateNotifiers, theme & item providers
+├── services/               # Hive storage managers and local preferences wrapper
+├── views/
+│   ├── onboarding/         # Splash, Intro carousel, and Welcome screen
+│   ├── home/               # Dashboard, Search bar, Category chips, and Item cards
+│   ├── categories/         # Category grid screen & isolated category lists
+│   ├── details/            # Detailed item modal / sheet
+│   └── settings/           # Profile summary, theme selector, and logout dialog
+└── main.dart               # App initialization and Hive box registration
