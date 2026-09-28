@@ -122,21 +122,3 @@ From dynamic category filtering and real-time search queries to multi-theme togg
 
 ---
 
-## 📂 Project Architecture
-
-```text
-lib/
-├── core/
-│   ├── constants/          # Colors, strings, asset paths, category definitions
-│   ├── theme/              # Light and Dark theme configurations
-│   └── utils/              # Dialogs, snackbars, and formatters
-├── models/                 # Hive TypeAdapters and item data models
-├── providers/              # Riverpod StateNotifiers, theme & item providers
-├── services/               # Hive storage managers and local preferences wrapper
-├── views/
-│   ├── onboarding/         # Splash, Intro carousel, and Welcome screen
-│   ├── home/               # Dashboard, Search bar, Category chips, and Item cards
-│   ├── categories/         # Category grid screen & isolated category lists
-│   ├── details/            # Detailed item modal / sheet
-│   └── settings/           # Profile summary, theme selector, and logout dialog
-└── main.dart               # App initialization and Hive box registration
