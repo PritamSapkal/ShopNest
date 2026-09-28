@@ -33,8 +33,8 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     baseColor: Colors.orange,
     backgroundColor: Colors.orange.withOpacity(0.08),
   ),
-  ItemCategory.meatAndSeafood: CategoryUiProps(
-    name: 'Meat & Seafood',
+  ItemCategory.meat: CategoryUiProps(
+    name: 'Meat',
     icon: Icons.kebab_dining_outlined,
     baseColor: Colors.red,
     backgroundColor: Colors.red.withOpacity(0.08),
@@ -46,7 +46,7 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     backgroundColor: Colors.brown.withOpacity(0.08),
   ),
   ItemCategory.snacksAndSweets: CategoryUiProps(
-    name: 'Snacks & Sweets',
+    name: 'SnacksAndSweets',
     icon:Icons.cookie_outlined,
     baseColor: Colors.purple,
     backgroundColor: Colors.purple.withOpacity(0.08),
@@ -57,14 +57,14 @@ final Map<ItemCategory, CategoryUiProps> categoryDetails = {
     baseColor: Colors.blueAccent,
     backgroundColor: Colors.blueAccent.withOpacity(0.08),
   ),
-  ItemCategory.householdAndClean: CategoryUiProps(
+  ItemCategory.household: CategoryUiProps(
     name: 'Household',
     icon: Icons.cleaning_services_outlined,
     baseColor: Colors.teal,
     backgroundColor: Colors.teal.withOpacity(0.08),
   ),
-  ItemCategory.healthAndCare: CategoryUiProps(
-    name: 'Health & Care',
+  ItemCategory.healthCare: CategoryUiProps(
+    name: 'HealthCare',
     icon:Icons.vaccines_outlined,
     baseColor: Colors.pink,
     backgroundColor: Colors.pink.withOpacity(0.08),

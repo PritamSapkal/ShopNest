@@ -24,7 +24,7 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
       case 4:
         return ItemCategory.bakery;
       case 5:
-        return ItemCategory.meatAndSeafood;
+        return ItemCategory.meat;
       case 6:
         return ItemCategory.kirana;
       case 7:
@@ -34,9 +34,9 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
       case 9:
         return ItemCategory.electronics;
       case 10:
-        return ItemCategory.householdAndClean;
+        return ItemCategory.household;
       case 11:
-        return ItemCategory.healthAndCare;
+        return ItemCategory.healthCare;
       case 12:
         return ItemCategory.others;
       default:
@@ -57,7 +57,7 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
         writer.writeByte(3);
       case ItemCategory.bakery:
         writer.writeByte(4);
-      case ItemCategory.meatAndSeafood:
+      case ItemCategory.meat:
         writer.writeByte(5);
       case ItemCategory.kirana:
         writer.writeByte(6);
@@ -67,9 +67,9 @@ class ItemCategoryAdapter extends TypeAdapter<ItemCategory> {
         writer.writeByte(8);
       case ItemCategory.electronics:
         writer.writeByte(9);
-      case ItemCategory.householdAndClean:
+      case ItemCategory.household:
         writer.writeByte(10);
-      case ItemCategory.healthAndCare:
+      case ItemCategory.healthCare:
         writer.writeByte(11);
       case ItemCategory.others:
         writer.writeByte(12);

@@ -21,7 +21,7 @@ enum ItemCategory {
   bakery,
 
   @HiveField(5)
-  meatAndSeafood,
+  meat,
 
   @HiveField(6)
   kirana,
@@ -36,10 +36,10 @@ enum ItemCategory {
   electronics,
 
   @HiveField(10)
-  householdAndClean,
+  household,
 
   @HiveField(11)
-  healthAndCare,
+  healthCare,
 
   @HiveField(12)
   others,
