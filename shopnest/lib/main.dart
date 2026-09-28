@@ -12,6 +12,7 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   await Hive.initFlutter();
 
   Hive.registerAdapters();
