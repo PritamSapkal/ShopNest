@@ -4,6 +4,7 @@
 
 ### Offline-First Grocery & Shopping List Management Mobile App
 
+
 <p>
   <b>Plan Smart • Organize Faster • Shop Better</b>
 </p>
